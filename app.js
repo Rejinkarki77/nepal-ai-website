@@ -127,3 +127,16 @@ function mountVoice(attempt){
   }, 3500);
 }
 mountVoice(1);
+
+/* ---- back to top ---- */
+const toTop = $("toTop");
+if (useWa) toTop.classList.add("to-top--above");
+let toTopTicking = false;
+function updateToTop(){ toTop.hidden = window.scrollY < 600; toTopTicking = false; }
+window.addEventListener("scroll", () => { if (!toTopTicking) { toTopTicking = true; requestAnimationFrame(updateToTop); } }, { passive: true });
+toTop.addEventListener("click", () => {
+  const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
+  document.querySelector(".wordmark").focus({ preventScroll: true });
+});
+updateToTop();
