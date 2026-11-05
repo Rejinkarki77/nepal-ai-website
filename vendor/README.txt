@@ -1,0 +1,1 @@
+convai-widget.js is @elevenlabs/convai-widget-embed 0.25.0 (MIT licence, see convai-widget.LICENSE), copied unmodified from the npm registry. It powers the voice assistant button. To update: npm pack @elevenlabs/convai-widget-embed and replace dist/index.js.
