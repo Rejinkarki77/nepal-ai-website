@@ -112,3 +112,18 @@ document.head.append(ld);
 
 window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
 document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
+
+/* ---- voice assistant: mounted from script so it can retry if ElevenLabs answers with a temporary error ---- */
+const VOICE_AGENT_ID = "agent_5601m6pt314tecgsf17zbvazxdk2";
+function mountVoice(attempt){
+  const el = document.createElement("elevenlabs-convai");
+  el.setAttribute("agent-id", VOICE_AGENT_ID);
+  document.body.append(el);
+  setTimeout(() => {
+    const ok = el.shadowRoot && el.shadowRoot.querySelector("button");
+    if (ok) return;
+    el.remove(); // settings request failed: try again with a fresh element
+    if (attempt < 8) mountVoice(attempt + 1);
+  }, 3500);
+}
+mountVoice(1);
