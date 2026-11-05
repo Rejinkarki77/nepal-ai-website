@@ -25,14 +25,15 @@
 <header class="nav">
   <div class="container nav__row">
     <a class="wordmark" href="#top"><svg class="mark" aria-hidden="true"><use href="#mandala"/></svg><span data-brand>Your Brand</span></a>
-    <nav class="nav__links" aria-label="Main">
+    <nav class="nav__links" id="navLinks" aria-label="Main">
       <a href="#services">Services</a>
       <a href="#industries">Who it’s for</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
-      <a class="btn" href="#contact">Get a free demo</a>
     </nav>
+    <a class="btn nav__cta" href="#contact">Get a free demo</a>
+    <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -192,8 +193,8 @@
       <h2>Get your free demo</h2>
       <p class="lead">Tell us about your business. We’ll show you what an AI assistant could do for you, with no obligation.</p>
       <dl>
-        <div><dt>WhatsApp</dt><dd data-phone>+977-98XXXXXXXX</dd></div>
-        <div><dt>Email</dt><dd data-email>hello@yourbrand.com.np</dd></div>
+        <div data-row><dt>Phone and WhatsApp</dt><dd><a class="link" data-phone href="#">Call us</a></dd></div>
+        <div data-row><dt>Email</dt><dd><a class="link" data-email href="#">Email us</a></dd></div>
         <div><dt>Location</dt><dd data-city>Kathmandu, Nepal</dd></div>
       </dl>
     </div>
@@ -204,8 +205,9 @@
       <div><label for="t">Business type</label>
         <select id="t"><option>Bakery</option><option>Cafe</option><option>Restaurant</option><option>Salon / Spa</option><option>Shop</option><option>Other</option></select></div>
       <div><label for="m">What would you like to automate?</label><textarea id="m" rows="3" maxlength="2000"></textarea></div>
-      <button class="btn" type="submit">Send on WhatsApp</button>
-      <p class="note">This opens WhatsApp with your message ready to send. We also keep your name and message so we can get back to you.</p>
+      <button class="btn" id="formSend" type="submit">Send on WhatsApp</button>
+      <p class="form__status" id="formStatus" role="status" aria-live="polite" hidden></p>
+      <p class="note" id="formNote">This opens WhatsApp with your message ready to send. We also keep your name and message so we can get back to you.</p>
     </form>
   </div>
 </section>
