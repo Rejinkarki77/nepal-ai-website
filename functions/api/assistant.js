@@ -115,10 +115,7 @@ export async function onRequestPost({ request, env }) {
       if (text.trim()) break;
     } catch (e) { lastErr = e; }
   }
-  if (!text.trim()) {
-    const preview = new URL(request.url).hostname !== 'nepal-ai-website.pages.dev';
-    return json(preview ? { error: 'busy', detail: String((lastErr && lastErr.message) || 'empty reply').slice(0, 300) } : { error: 'busy' }, 503);
-  }
+  if (!text.trim()) return json({ error: 'busy' }, 503);
 
   let leadSaved = false;
   const m = text.match(/\[\[LEAD\s*(\{[\s\S]*?\})\s*\]\]/);

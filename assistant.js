@@ -40,7 +40,7 @@
   CHIPS.forEach((c) => { const b = $("button", "va-chip", { type: "button" }); b.textContent = c; b.addEventListener("click", () => { chips.hidden = true; send(c); }); chips.append(b); });
 
   const form = $("form", "va-form", { novalidate: "" });
-  const input = $("input", "va-input", { type: "text", maxlength: "500", placeholder: "Type or tap the microphone", "aria-label": "Your message", autocomplete: "off" });
+  const input = $("input", "va-input", { type: "text", maxlength: "500", placeholder: "Type or tap the mic", "aria-label": "Your message", autocomplete: "off" });
   const mic = $("button", "va-mic", { type: "button", "aria-label": "Speak to the assistant" });
   const sendBtn = $("button", "va-send", { type: "submit", "aria-label": "Send message" });
   sendBtn.append(svg(ICON.send));
