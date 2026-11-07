@@ -110,7 +110,7 @@ export async function onRequestPost({ request, env }) {
     const out = await env.AI.run(MODEL, { messages: [{ role: 'system', content: SYSTEM }, ...messages], max_tokens: 200, temperature: 0.3 });
     text = String(out && (out.response || (out.result && out.result.response)) || '');
   } catch (e) {
-    return json({ error: 'busy' }, 503);
+    const preview = new URL(request.url).hostname !== 'nepal-ai-website.pages.dev'; return json(preview ? { error: 'busy', detail: String((e && e.message) || e).slice(0, 300), hasAI: !!(env && env.AI) } : { error: 'busy' }, 503);
   }
 
   let leadSaved = false;

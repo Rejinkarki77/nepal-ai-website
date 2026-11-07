@@ -50,7 +50,7 @@ export async function onRequestPost({ request, env }) {
     const text = String((out && out.text) || '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, 600);
     return json({ text });
   } catch (e) {
-    return json({ error: 'busy' }, 503);
+    const preview = new URL(request.url).hostname !== 'nepal-ai-website.pages.dev'; return json(preview ? { error: 'busy', detail: String((e && e.message) || e).slice(0, 300), hasAI: !!(env && env.AI) } : { error: 'busy' }, 503);
   }
 }
 
