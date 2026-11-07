@@ -2,7 +2,8 @@
 // No secret keys live here: the AI binding is configured in wrangler.jsonc, and the database key below is the
 // same insert-only public key the website form already uses.
 
-const MODEL = '@cf/meta/llama-3.1-8b-instruct';
+// Tried in order. If Cloudflare retires one, the next takes over, so the assistant keeps working.
+const MODELS = ['@cf/meta/llama-3.1-8b-instruct-fp8', '@cf/google/gemma-4-26b-a4b-it'];
 const SUPABASE_URL = 'https://svjglbxmeodcfiodupvf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_HdtavQYEN0VP1gEAYQU7vg_xRw2Gvbv';
 
@@ -105,12 +106,17 @@ export async function onRequestPost({ request, env }) {
     .slice(-10);
   if (!messages.length || messages[messages.length - 1].role !== 'user') return json({ error: 'bad_request' }, 400);
 
-  let text;
-  try {
-    const out = await env.AI.run(MODEL, { messages: [{ role: 'system', content: SYSTEM }, ...messages], max_tokens: 200, temperature: 0.3 });
-    text = String(out && (out.response || (out.result && out.result.response)) || '');
-  } catch (e) {
-    const preview = new URL(request.url).hostname !== 'nepal-ai-website.pages.dev'; return json(preview ? { error: 'busy', detail: String((e && e.message) || e).slice(0, 300), hasAI: !!(env && env.AI) } : { error: 'busy' }, 503);
+  let text = '', lastErr = null;
+  for (const model of MODELS) {
+    try {
+      const out = await env.AI.run(model, { messages: [{ role: 'system', content: SYSTEM }, ...messages], max_tokens: 200, temperature: 0.3 });
+      text = String((out && (out.response || (out.result && out.result.response) || (out.choices && out.choices[0] && out.choices[0].message && out.choices[0].message.content))) || '');
+      if (text.trim()) break;
+    } catch (e) { lastErr = e; }
+  }
+  if (!text.trim()) {
+    const preview = new URL(request.url).hostname !== 'nepal-ai-website.pages.dev';
+    return json(preview ? { error: 'busy', detail: String((lastErr && lastErr.message) || 'empty reply').slice(0, 300) } : { error: 'busy' }, 503);
   }
 
   let leadSaved = false;
