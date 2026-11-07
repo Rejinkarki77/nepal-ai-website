@@ -1,0 +1,8 @@
+{
+  // Cloudflare Pages settings for the site. The "ai" binding gives the assistant's server code
+  // access to Cloudflare's free Workers AI models (no API key needed).
+  "name": "nepal-ai-website",
+  "pages_build_output_dir": ".",
+  "compatibility_date": "2025-09-01",
+  "ai": { "binding": "AI" }
+}
