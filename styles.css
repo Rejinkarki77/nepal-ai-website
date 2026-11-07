@@ -227,5 +227,5 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .va-send:disabled { opacity: 0.55; cursor: not-allowed; }
 .va-consent { padding-block: var(--space-md); }
 .va-consent p { margin-bottom: var(--space-md); font-size: var(--text-sm); color: var(--color-ink-2); }
-@media (max-width: 40rem) { .va-panel { left: 0; right: 0; bottom: 0; width: 100%; height: min(86svh, 640px); border-radius: var(--radius-card) var(--radius-card) 0 0; } }
+@media (max-width: 40rem) { .va-panel { left: 0; right: 0; bottom: 0; width: 100%; max-width: none; height: min(86svh, 640px); border-radius: var(--radius-card) var(--radius-card) 0 0; } }
 @media (prefers-reduced-motion: reduce) { .va-launch, .va-icon, .va-mic, .va-send { transition: none; } .va-mic { transform: none; } }
