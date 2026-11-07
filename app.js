@@ -83,7 +83,7 @@ form.addEventListener("submit", async e => {
 
 /* ---- live demo ---- */
 const DEMOS = {
-  bakery: [["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in","Ha, 1 kg chocolate cake, bholi 4 baje."],["bot","Noted: 1 kg chocolate cake, pickup tomorrow at 4 PM. We will remind you.",1]],
+  bakery: [["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in"," 1 kg chocolate cake, bholi 4 baje."],["bot","Noted: 1 kg chocolate cake, pickup tomorrow at 4 PM. We will remind you.",1]],
   cafe: [["in","Aaja rati 7 baje 4 jana ko table huncha?"],["bot","Yes, a table for 4 at 7 PM is free. What name should I put it under?"],["in","Prakash"],["bot","Booked: Prakash, 4 people, 7 PM tonight. We will remind you at 5 PM.",1]],
   restaurant: [["in","Veg momo ra chowmein delivery huncha?"],["bot","Yes, we deliver nearby. Veg momo and chowmein added. What is your delivery address?"],["in","Baneshwor, near the temple"],["bot","Thank you! Your order is with the kitchen. We will message you when it leaves.",1]],
   salon: [["in","Haircut ko lagi aaja 4 baje slot chha?"],["bot","Yes, 4 PM is free. Shall I book it for you?"],["in","Ha"],["bot","Booked for 4 PM today. See you soon!",1]]
@@ -126,3 +126,152 @@ toTop.addEventListener("click", () => {
   document.querySelector(".wordmark").focus({ preventScroll: true });
 });
 updateToTop();
+
+/* ---- demo tabs: sliding underline that follows the selected tab ---- */
+(function () {
+  const bar = document.querySelector(".demo__tabs");
+  if (!bar) return;
+  const ink = document.createElement("span");
+  ink.className = "demo__ink"; ink.setAttribute("aria-hidden", "true");
+  bar.append(ink);
+  let first = true;
+  function moveInk() {
+    const on = bar.querySelector('[aria-selected="true"]');
+    if (!on) return;
+    if (first) ink.style.transition = "none"; // place it without sliding on page load
+    ink.style.width = on.offsetWidth + "px";
+    ink.style.transform = "translate(" + on.offsetLeft + "px," + (on.offsetTop + on.offsetHeight - 2) + "px)";
+    if (first) { void ink.offsetWidth; ink.style.transition = ""; first = false; }
+  }
+  bar.addEventListener("click", moveInk);
+  bar.addEventListener("keydown", moveInk);
+  window.addEventListener("resize", moveInk);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+  moveInk();
+})();
+
+/* ---- hero chat: messages appear one by one, with a typing indicator before each AI reply ---- */
+(function () {
+  const log = document.querySelector(".hero .chat__log");
+  if (!log || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const msgs = [...log.children];
+  log.style.minHeight = log.offsetHeight + "px"; // keep the card from growing as messages arrive
+  msgs.forEach(m => m.classList.add("is-queued"));
+  const typing = document.createElement("p");
+  typing.className = "bubble bubble--bot typing"; typing.setAttribute("aria-hidden", "true");
+  for (let k = 0; k < 3; k++) typing.append(document.createElement("span"));
+  let i = 0;
+  function next() {
+    if (i >= msgs.length) { log.style.minHeight = ""; return; }
+    const m = msgs[i++], bot = m.classList.contains("bubble--bot");
+    const show = () => { typing.remove(); m.classList.remove("is-queued"); setTimeout(next, bot ? 800 : 500); };
+    if (bot) { m.before(typing); setTimeout(show, 1100); } else show();
+  }
+  setTimeout(next, 700);
+})();
+
+/* ---- industries: pills pop in and the demo chat plays when the section scrolls into view; it replays on each tab switch ---- */
+(function () {
+  const sec = document.getElementById("industries");
+  const log = document.getElementById("demo-log");
+  const bar = document.querySelector(".demo__tabs");
+  if (!sec || !log || !bar) return;
+  const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const pills = [...sec.querySelectorAll(".trades li")];
+  const typing = document.createElement("p");
+  typing.className = "bubble bubble--bot typing"; typing.setAttribute("aria-hidden", "true");
+  for (let k = 0; k < 3; k++) typing.append(document.createElement("span"));
+  const picked = () => { const on = bar.querySelector('[aria-selected="true"]'); return on ? on.dataset.demo : ""; };
+  let run = 0, current = picked();
+
+  function play() {
+    const id = ++run; typing.remove();
+    if (calm) return;
+    const msgs = [...log.children];
+    msgs.forEach(m => m.classList.add("is-queued"));
+    let i = 0;
+    (function next() {
+      if (id !== run || i >= msgs.length) return;
+      const m = msgs[i++], bot = m.classList.contains("bubble--bot");
+      const show = () => { if (id !== run) return; typing.remove(); m.classList.remove("is-queued"); setTimeout(next, bot ? 700 : 450); };
+      if (bot) { m.before(typing); setTimeout(show, 900); } else show();
+    })();
+  }
+  function onTab() { const now = picked(); if (now && now !== current) { current = now; play(); } }
+  bar.addEventListener("click", onTab);
+  bar.addEventListener("keydown", onTab);
+
+  if (calm) return;
+  pills.forEach(p => p.classList.add("pill-wait"));
+  [...log.children].forEach(m => m.classList.add("is-queued")); // hidden until the section is on screen
+  let started = false;
+  function start() {
+    if (started) return; started = true;
+    pills.forEach((p, k) => setTimeout(() => p.classList.remove("pill-wait"), k * 70));
+    play();
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); start(); } }, { threshold: 0.3 });
+    io.observe(sec);
+  } else start();
+})();
+
+/* ---- header: scroll progress, compact state, and the current section in the menu ---- */
+(function () {
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+  const links = [...nav.querySelectorAll('.nav__links a[href^="#"]')];
+  const targets = links.map(a => document.getElementById(a.getAttribute("href").slice(1)));
+  const contact = document.getElementById("contact");
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
+    nav.style.setProperty("--progress", max > 0 ? Math.min(y / max, 1).toFixed(4) : "0");
+    nav.classList.toggle("is-scrolled", y > 12);
+    const line = window.innerHeight * 0.35;
+    let cur = -1;
+    targets.forEach((t, i) => { if (t && t.getBoundingClientRect().top <= line) cur = i; });
+    if (contact && contact.getBoundingClientRect().top <= line) cur = -1; // the demo button covers this section
+    links.forEach((a, i) => { if (i === cur) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current"); });
+  }
+  const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  update();
+})();
+
+/* ---- smooth glide to sections when a menu or button link is clicked ---- */
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const MAX_MS = 1000, MIN_MS = 500;
+  const ease = t => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let raf = 0;
+  const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+  ["wheel", "touchstart"].forEach(ev => window.addEventListener(ev, stop, { passive: true }));
+  document.addEventListener("click", e => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    let id = a.getAttribute("href").slice(1);
+    try { id = decodeURIComponent(id); } catch (_) {}
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const from = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const to = Math.max(0, Math.min(max, target.getBoundingClientRect().top + from - pad));
+    const dur = Math.min(MAX_MS, Math.max(MIN_MS, Math.abs(to - from) * 0.6));
+    const t0 = performance.now();
+    stop();
+    function step(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      window.scrollTo({ top: from + (to - from) * ease(p), behavior: "instant" });
+      if (p < 1) { raf = requestAnimationFrame(step); return; }
+      raf = 0;
+      if (location.hash !== "#" + id) history.pushState(null, "", "#" + id);
+      target.setAttribute("tabindex", "-1"); target.focus({ preventScroll: true });
+    }
+    raf = requestAnimationFrame(step);
+  });
+})();
