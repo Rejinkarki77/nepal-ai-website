@@ -14,6 +14,7 @@ const CONFIG = {
 const $ = id => document.getElementById(id);
 // A detail still showing its example value is "not set up yet": it is hidden, not shown to visitors.
 const PLACEHOLDER = {
+  brand: CONFIG.brand === "Your Brand",
   whatsapp: CONFIG.whatsapp === "9779800000000" || /x/i.test(CONFIG.whatsapp),
   phone: /x/i.test(CONFIG.phoneDisplay),
   email: /@yourbrand\./.test(CONFIG.email)
@@ -25,7 +26,7 @@ phoneEl.textContent = CONFIG.phoneDisplay; phoneEl.href = "tel:" + CONFIG.phoneD
 emailEl.textContent = CONFIG.email; emailEl.href = "mailto:" + CONFIG.email;
 phoneEl.closest("[data-row]").hidden = PLACEHOLDER.phone;
 emailEl.closest("[data-row]").hidden = PLACEHOLDER.email;
-document.title = CONFIG.brand + " | AI Automation for Nepali Businesses";
+if (!PLACEHOLDER.brand) document.title = CONFIG.brand + " | AI Automation for Nepali Businesses";
 $("yr").textContent = new Date().getFullYear();
 const wa = t => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(t);
 const useWa = !PLACEHOLDER.whatsapp;
@@ -103,12 +104,14 @@ tabs.forEach((t,i)=>{
   t.addEventListener("keydown",e=>{ const d={ArrowRight:1,ArrowLeft:-1}[e.key]; if(!d) return; const n=tabs[(i+d+tabs.length)%tabs.length]; n.focus(); showDemo(n.dataset.demo); });
 });
 /* ---- search engines: business details from CONFIG ---- */
-const ld=document.createElement("script"); ld.type="application/ld+json";
-const org={"@context":"https://schema.org","@type":"ProfessionalService",name:CONFIG.brand,description:"WhatsApp and AI automation for bakeries, cafes, restaurants and shops in Nepal.",areaServed:{"@type":"Country",name:"Nepal"},address:{"@type":"PostalAddress",addressLocality:CONFIG.city}};
-if(!PLACEHOLDER.email) org.email=CONFIG.email;
-if(!PLACEHOLDER.phone) org.telephone=CONFIG.phoneDisplay;
-ld.textContent=JSON.stringify(org);
-document.head.append(ld);
+if (!PLACEHOLDER.brand) {
+  const ld=document.createElement("script"); ld.type="application/ld+json";
+  const org={"@context":"https://schema.org","@type":"ProfessionalService",name:CONFIG.brand,url:location.origin+"/",description:"WhatsApp and AI automation for bakeries, cafes, restaurants and shops in Nepal.",areaServed:{"@type":"Country",name:"Nepal"},address:{"@type":"PostalAddress",addressLocality:CONFIG.city}};
+  if(!PLACEHOLDER.email) org.email=CONFIG.email;
+  if(!PLACEHOLDER.phone) org.telephone=CONFIG.phoneDisplay;
+  ld.textContent=JSON.stringify(org);
+  document.head.append(ld);
+}
 
 window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
 document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
@@ -126,3 +129,14 @@ toTop.addEventListener("click", () => {
   document.querySelector(".wordmark").focus({ preventScroll: true });
 });
 updateToTop();
+
+/* ---- privacy-friendly visit count: no cookies, no IP address or browser details stored ---- */
+(function(){
+  try {
+    if (navigator.doNotTrack === "1" || navigator.globalPrivacyControl) return;
+    const k = "pv:" + location.pathname; if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, "1");
+    let ref = ""; try { if (document.referrer) { const h = new URL(document.referrer).hostname; if (h !== location.hostname) ref = h; } } catch (_) {}
+    const source = (new URLSearchParams(location.search).get("utm_source") || "").slice(0, 80);
+    fetch("/api/hit", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" }, body: JSON.stringify({ path: location.pathname, ref, source }) }).catch(() => {});
+  } catch (_) {}
+})();

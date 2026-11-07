@@ -49,6 +49,7 @@
   const consent = $("div", "va-consent");
   const consentText = $("p"); consentText.textContent = "This is an AI assistant. What you type or say is sent to our server and an AI service to write a reply, and what you say is turned into text there. Please don't share passwords or card numbers.";
   const consentBtn = $("button", "btn", { type: "button" }); consentBtn.textContent = "OK, let's chat";
+  const consentLink = $("a", "link", { href: "/privacy/" }); consentLink.textContent = "Read our privacy policy"; consentText.append(" ", consentLink);
   consent.append(consentText, consentBtn);
 
   panel.append(head, consent, log, status, chips, form);
