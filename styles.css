@@ -204,7 +204,7 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .va-launch:hover { background: var(--color-accent-hi); }
 .va-launch:active { transform: translateY(1px); }
 .va-launch svg, .va-icon svg, .va-mic svg, .va-send svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
-.va-panel { position: fixed; left: var(--space-md); bottom: var(--space-md); z-index: 24; display: flex; flex-direction: column; width: min(400px, calc(100vw - var(--space-xl))); height: min(620px, calc(100svh - var(--space-xl))); padding: var(--space-md); background: color-mix(in oklab, var(--color-paper) 94%, transparent); overflow: hidden; }
+.va-panel { position: fixed; left: var(--space-md); bottom: var(--space-md); z-index: 24; display: flex; flex-direction: column; width: 400px; max-width: calc(100% - var(--space-xl)); height: min(620px, calc(100svh - var(--space-xl))); padding: var(--space-md); background: color-mix(in oklab, var(--color-paper) 94%, transparent); overflow: hidden; }
 .va-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid color-mix(in oklab, var(--color-light) 9%, transparent); font-family: var(--font-display); font-size: var(--text-lg); }
 .va-tools { display: flex; gap: var(--space-xs); }
 .va-icon { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-rule); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out); }
