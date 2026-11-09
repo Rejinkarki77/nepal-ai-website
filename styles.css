@@ -474,3 +474,5 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 @media (min-width: 60.01rem) { .nav__links { margin-inline: auto; } }
 .nav__toggle, .nav__cta, .theme-toggle { flex: none; }
 @media (max-width: 28rem) { .nav__cta { display: none; } .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }
+.nav__links a { white-space: nowrap; }
+@media (min-width: 60.01rem) and (max-width: 75rem) { .nav__row { gap: var(--space-sm); } .nav__links a:not(.btn) { padding-inline: var(--space-sm); } .nav__cta { margin-left: var(--space-sm); } }
