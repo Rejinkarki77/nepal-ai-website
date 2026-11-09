@@ -452,3 +452,25 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 @keyframes net-flow { to { stroke-dashoffset: -128; } }
 @media (prefers-reduced-motion: reduce) { .aura, .hero__mandala, .hero__net .sig, .hero__net circle { animation: none; } .hero__net .sig { stroke-dasharray: none; stroke-opacity: 0.3; } }
 @media (max-width: 60rem) { .hero__net { -webkit-mask-image: none; mask-image: none; opacity: 0.55; } .hero__mandala { right: -40%; opacity: 0.1; } }
+
+/* ---------- theme toggle ---------- */
+.theme-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; margin-left: var(--space-sm); padding: 0; border: 0; border-radius: var(--radius-pill); background: transparent; color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-rule); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out); }
+.theme-toggle:hover { background: color-mix(in oklab, var(--color-light) 9%, transparent); }
+.theme-toggle:active { transform: translateY(1px); }
+.theme-toggle svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 24rem) { .nav__cta { display: none; } .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }
+
+/* ---------- light mode: adjustments ---------- */
+:root[data-theme="light"] .aura { opacity: 0.34; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .aura { opacity: 0.34; } }
+:root[data-theme="light"] .hero__mandala { opacity: 0.16; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .hero__mandala { opacity: 0.16; } }
+:root[data-theme="light"] .hero__net line { stroke-opacity: 0.3; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .hero__net line { stroke-opacity: 0.3; } }
+:root[data-theme="light"] .va-mic[data-state="recording"] { color: var(--color-day-ink); }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .va-mic[data-state="recording"] { color: var(--color-day-ink); } }
+
+/* header: keep the button and the toggle together, and stop the row squeezing the menu button */
+@media (min-width: 60.01rem) { .nav__links { margin-inline: auto; } }
+.nav__toggle, .nav__cta, .theme-toggle { flex: none; }
+@media (max-width: 28rem) { .nav__cta { display: none; } .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }

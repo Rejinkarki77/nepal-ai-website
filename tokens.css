@@ -24,3 +24,33 @@
   --radius-card: 18px; --radius-inner: 10px; --radius-pill: 999px; --rule-hair: 1px;
   --tracking-display: -0.022em; --display-weight: 500;
 }
+
+/* ---------- light mode: the same hues, every colour re-derived. Dark stays the default. ---------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-paper: oklch(98.5% 0.006 268); --color-paper-2: oklch(96% 0.008 268); --color-paper-3: oklch(93% 0.010 268);
+  --color-ink: oklch(21% 0.020 268); --color-ink-2: oklch(36% 0.020 266); --color-muted: oklch(48% 0.018 264);
+  --color-rule: oklch(88% 0.010 266); --color-light: oklch(20% 0.020 268); --color-shade: oklch(40% 0.030 268);
+  --color-accent: oklch(52% 0.150 274); --color-accent-ink: oklch(99% 0.005 274); --color-accent-hi: oklch(46% 0.160 274);
+  --color-accent-deep: oklch(40% 0.140 274); --color-accent-soft: oklch(94% 0.030 274); --color-focus: oklch(50% 0.170 274);
+  --color-accent-2: oklch(66% 0.140 58); --color-dusk: oklch(60% 0.150 330);
+  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.130 150);
+  --glass: oklch(100% 0 0 / 0.66);
+  --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.90), inset 0 0 0 1px oklch(30% 0.020 268 / 0.08);
+  --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.70) inset, 0 30px 60px -34px oklch(30% 0.040 268 / 0.28);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+  color-scheme: light;
+  --color-paper: oklch(98.5% 0.006 268); --color-paper-2: oklch(96% 0.008 268); --color-paper-3: oklch(93% 0.010 268);
+  --color-ink: oklch(21% 0.020 268); --color-ink-2: oklch(36% 0.020 266); --color-muted: oklch(48% 0.018 264);
+  --color-rule: oklch(88% 0.010 266); --color-light: oklch(20% 0.020 268); --color-shade: oklch(40% 0.030 268);
+  --color-accent: oklch(52% 0.150 274); --color-accent-ink: oklch(99% 0.005 274); --color-accent-hi: oklch(46% 0.160 274);
+  --color-accent-deep: oklch(40% 0.140 274); --color-accent-soft: oklch(94% 0.030 274); --color-focus: oklch(50% 0.170 274);
+  --color-accent-2: oklch(66% 0.140 58); --color-dusk: oklch(60% 0.150 330);
+  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.130 150);
+  --glass: oklch(100% 0 0 / 0.66);
+  --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.90), inset 0 0 0 1px oklch(30% 0.020 268 / 0.08);
+  --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.70) inset, 0 30px 60px -34px oklch(30% 0.040 268 / 0.28);
+}
+}
