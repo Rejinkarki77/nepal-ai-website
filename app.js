@@ -1,4 +1,5 @@
 "use strict";
+document.documentElement.classList.add("js"); // lets styles hide things only when this script is running
 /* ===== EDIT THESE ===== */
 const CONFIG = {
   brand: "Your Brand",            // company name
@@ -153,8 +154,7 @@ updateToTop();
     const on = bar.querySelector('[aria-selected="true"]');
     if (!on) return;
     if (first) ink.style.transition = "none"; // place it without sliding on page load
-    ink.style.width = on.offsetWidth + "px";
-    ink.style.transform = "translate(" + on.offsetLeft + "px," + (on.offsetTop + on.offsetHeight - 2) + "px)";
+    ink.style.transform = "translate(" + on.offsetLeft + "px," + (on.offsetTop + on.offsetHeight - 2) + "px) scaleX(" + on.offsetWidth + ")";
     if (first) { void ink.offsetWidth; ink.style.transition = ""; first = false; }
   }
   bar.addEventListener("click", moveInk);
