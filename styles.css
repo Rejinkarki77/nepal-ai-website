@@ -16,7 +16,6 @@
 .nav__links a:not(.btn) { color: var(--color-ink-2); text-decoration: none; font-size: var(--text-sm); font-weight: 500; padding: var(--space-xs) 0; }
 .nav__links a:not(.btn):hover { color: var(--color-ink); text-decoration: underline; }
 
-
 /* ---------- controls ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--space-lg); border: 0; border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-accent-ink); font: 600 0.9375rem/1 var(--font-body); text-decoration: none; white-space: nowrap; cursor: pointer; box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent); transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
 .btn:hover { background: var(--color-accent-hi); }
@@ -188,7 +187,6 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .faq summary { padding-block: var(--space-xs); }
 .wordmark { min-height: 44px; }
 
-
 /* ---------- back to top ---------- */
 .to-top { position: fixed; right: var(--space-md); bottom: var(--space-md); z-index: 19; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: var(--radius-pill); background: var(--color-paper-2); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-accent), var(--shadow-card); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), transform var(--dur-micro) var(--ease-out); }
 .to-top svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -238,6 +236,7 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .prose .meta { color: var(--color-muted); font-size: var(--text-sm); }
 .crumbs { margin-bottom: var(--space-md); font-size: var(--text-sm); color: var(--color-muted); }
 .crumbs a { color: var(--color-ink-2); }
+
 /* services: each item is a glass bubble, like the assistant's chat replies */
 .rules--cards { display: grid; gap: var(--space-sm); border-top: 0; }
 .rules--cards > li { position: relative; overflow: hidden; padding: var(--space-md) var(--space-lg); border: 0; border-radius: var(--radius-inner); background: color-mix(in oklab, var(--color-accent) 14%, var(--color-paper-2)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 22%, transparent); transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
@@ -323,7 +322,6 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .faq details p { margin: 0; padding: 0 var(--space-lg) var(--space-md); }
 .faq details[open] p { animation: faq-in var(--dur-long) var(--ease-out) both; }
 @keyframes faq-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
-
 /* contact: form card, fields and button */
 #lead { position: relative; overflow: hidden; background: color-mix(in oklab, var(--color-accent) 9%, var(--color-paper-2)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 28%, transparent), 0 40px 80px -40px color-mix(in oklab, var(--color-accent) 45%, transparent); transition: box-shadow var(--dur-long) var(--ease-out); }
 #lead::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2)); }
@@ -368,8 +366,7 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .hero__actions .btn { box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent), 0 14px 32px -14px color-mix(in oklab, var(--color-accent-deep) 90%, transparent); transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
 .hero__actions .btn:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent), 0 20px 40px -14px color-mix(in oklab, var(--color-accent-deep) 100%, transparent); }
 .hero__actions .btn:active { transform: translateY(1px); }
-.hero .chat__head strong { display: inline-flex; align-items: center; gap: var(--space-xs); }
-.hero .chat__head strong::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--color-success); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-success) 25%, transparent); }
+
 .hero .chat__log .bubble:nth-child(n) { animation-delay: 0s; }
 .hero .chat__log .is-queued { display: none; }
 .bubble.typing { display: inline-flex; align-items: center; gap: var(--space-2xs); padding: var(--space-md); }
@@ -476,3 +473,406 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 @media (max-width: 28rem) { .nav__cta { display: none; } .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }
 .nav__links a { white-space: nowrap; }
 @media (min-width: 60.01rem) and (max-width: 75rem) { .nav__row { gap: var(--space-sm); } .nav__links a:not(.btn) { padding-inline: var(--space-sm); } .nav__cta { margin-left: var(--space-sm); } }
+
+/* ---------- preserved original UI enhancements ---------- */
+/* hero chat: keep bubbles at their natural height while the conversation plays */
+.hero .chat__log { align-content: start; }
+
+/* hero: nudge the chat card to the right on wide screens */
+@media (min-width: 90.01rem) {
+  .hero .chat { transform: translateX(clamp(0px, 5vw, 90px)); }
+}
+
+/* original contact CTA styles remain available for contact.html */
+@view-transition { navigation: auto; }
+.contact:has(.connect) .mandala-bg { display: none; }
+.connect-section { display: grid; justify-items: center; gap: var(--space-xl); text-align: center; }
+.connect-section h2 { max-width: none; }
+.connect { display: grid; place-items: center; min-height: 420px; }
+.connect__rings { position: relative; display: grid; place-items: center; width: min(460px, 82vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 66%); }
+.connect__rings::before, .connect__rings::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.connect__rings::before { inset: 0; border: 1px dashed color-mix(in oklab, var(--color-accent) 55%, transparent); animation: turn 120s linear infinite; }
+.connect__rings::after { inset: 13%; border: 1px solid color-mix(in oklab, var(--color-accent) 50%, transparent); transition: transform var(--dur-long) var(--ease-out), border-color var(--dur-short) var(--ease-out); }
+.connect__ring { position: absolute; inset: 25%; border-radius: 50%; border: 1px solid color-mix(in oklab, var(--color-accent) 80%, transparent); transition: transform var(--dur-long) var(--ease-out), opacity var(--dur-short) var(--ease-out); }
+.connect__btn { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2xs); width: 42%; aspect-ratio: 1; border-radius: 50%; background: var(--color-accent); color: var(--color-accent-ink); font: 600 var(--text-lg)/1.15 var(--font-body); text-align: center; text-decoration: none; box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent), 0 20px 48px -14px color-mix(in oklab, var(--color-accent) 85%, transparent); transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.connect__btn::after { content: "\2192"; font-size: var(--text-xl); line-height: 1; transition: transform var(--dur-short) var(--ease-out); }
+.connect__rings:hover .connect__btn, .connect__btn:focus-visible { transform: scale(1.06); background: var(--color-accent-hi); box-shadow: inset 0 1px 0 color-mix(in oklab, var(--color-light) 35%, transparent), 0 26px 56px -14px var(--color-accent); }
+.connect__rings:hover .connect__btn::after { transform: translateX(6px); }
+.connect__rings:hover::after { transform: scale(1.05); border-color: var(--color-accent); }
+.connect__rings:hover .connect__ring { transform: scale(1.1); opacity: 0.55; }
+.connect__btn:active { transform: scale(0.98); }
+.back { display: inline-block; margin-bottom: var(--space-md); font-size: var(--text-sm); }
+
+/* header: slides away when scrolling down, returns when scrolling up */
+.nav { transition: transform var(--dur-long) var(--ease-out), background-color var(--dur-long) var(--ease-out), box-shadow var(--dur-long) var(--ease-out); }
+.nav.is-hidden { transform: translateY(-100%); box-shadow: none; }
+.nav:focus-within, .nav:has(.nav__links.is-open) { transform: none; }
+
+/* pricing: original card affordances */
+.plans > .plan { display: flex; flex-direction: column; }
+.plan ul { flex: 1; }
+.plan__for { margin-top: var(--space-2xs); color: var(--color-muted); font-size: var(--text-sm); }
+.plan li { position: relative; padding-left: var(--space-lg); }
+.plan li::before { content: ""; position: absolute; left: 3px; top: 50%; width: 5px; height: 9px; border-right: 2px solid var(--color-accent); border-bottom: 2px solid var(--color-accent); transform: translateY(-65%) rotate(45deg); }
+.plan .btn { width: 100%; }
+.plan__badge { position: absolute; top: var(--space-md); right: var(--space-md); padding: var(--space-3xs) var(--space-sm); border-radius: var(--radius-pill); background: var(--color-accent); color: var(--color-accent-ink); font-size: var(--text-xs); font-weight: 600; }
+
+/* header: slides away when scrolling down, returns when scrolling up */
+.nav {
+  transition:
+    transform var(--dur-long) var(--ease-out),
+    background-color var(--dur-long) var(--ease-out),
+    box-shadow var(--dur-long) var(--ease-out);
+}
+
+.nav.is-hidden {
+  transform: translateY(-100%);
+  box-shadow: none;
+}
+
+.nav:focus-within,
+.nav:has(.nav__links.is-open) {
+  transform: none;
+}
+
+/* =========================================
+   COLOR-CHANGING HERO TEXT
+========================================= */
+
+.shine {
+  display: inline;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2),
+    var(--color-dusk),
+    var(--color-accent-hi),
+    var(--color-accent)
+  );
+
+  background-size: 300% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  animation: shine-text 7s ease-in-out infinite;
+}
+
+/* =========================================
+   COLOR ANIMATION
+========================================= */
+
+@keyframes shine-text {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .shine {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
+/* =========================================
+   PAGE LOADING ANIMATION
+========================================= */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-paper);
+  color: var(--color-ink);
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.6s ease,
+    visibility 0.6s ease;
+}
+
+/* Loader disappears */
+.page-loader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Loader content */
+.loader-content {
+  width: min(280px, 80vw);
+  text-align: center;
+}
+
+/* Logo */
+.loader-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mandala logo */
+.loader-mark {
+  width: 72px;
+  height: 72px;
+
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 1.2;
+
+  animation:
+    loader-spin 3s linear infinite,
+    loader-pulse 1.8s ease-in-out infinite;
+}
+
+/* Brand name */
+.loader-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+
+  margin-bottom: 24px;
+}
+
+/* Loading bar */
+.loader-bar {
+  width: 100%;
+  height: 3px;
+
+  overflow: hidden;
+  border-radius: 999px;
+
+  background: color-mix(
+    in oklab,
+    var(--color-accent) 15%,
+    transparent
+  );
+}
+
+/* Animated loading progress */
+.loader-bar span {
+  display: block;
+  width: 35%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2),
+    var(--color-dusk),
+    var(--color-accent)
+  );
+
+  background-size: 300% 100%;
+
+  animation:
+    loader-progress 1.5s ease-in-out infinite,
+    loader-gradient 2s linear infinite;
+}
+
+/* Loading text */
+.loader-content p {
+  margin-top: 12px;
+
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-ink-2);
+}
+
+/* Logo rotation */
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Logo breathing */
+@keyframes loader-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Loading bar movement */
+@keyframes loader-progress {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+/* Loading bar color movement */
+@keyframes loader-gradient {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 300% 50%;
+  }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .loader-mark,
+  .loader-bar span {
+    animation: none;
+  }
+}
+
+/* ---------- restrained visual effects: remove excessive glow ---------- */
+.aura {
+  display: none;
+  animation: none;
+}
+
+.hero__mandala {
+  opacity: 0.06;
+  animation: none;
+}
+
+.hero__net line {
+  stroke-opacity: 0.12;
+}
+
+.hero__net circle {
+  opacity: 0.35;
+  animation: none;
+}
+
+/* Use clean, neutral depth instead of colored glow. */
+.glass,
+.demo,
+#lead,
+.rules--cards > li,
+.rules--tiles > li,
+.plans > .plan,
+.faq details,
+.contact dl > div,
+.connect__btn {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+}
+
+.rules--cards > li:hover,
+.rules--cards > li:focus-within,
+.rules--tiles > li:hover,
+.rules--tiles > li:focus-within,
+.plans > .plan:hover,
+.plans > .plan:focus-within,
+.plans > .plan--feat,
+.plans > .plan--feat:hover,
+.plans > .plan--feat:focus-within,
+.faq details:hover,
+.faq details[open],
+#lead:hover,
+#lead:focus-within,
+.contact dl > div:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.10) !important;
+}
+
+.btn,
+.hero__actions .btn,
+.nav__cta,
+.va-launch,
+.plan .btn,
+#lead .btn,
+.connect__btn {
+  box-shadow: none !important;
+}
+
+.btn:hover,
+.hero__actions .btn:hover,
+.nav__cta:hover,
+.plan .btn:hover,
+#lead .btn:hover:not(:disabled),
+.connect__rings:hover .connect__btn {
+  box-shadow: none !important;
+}
+
+#lead input:focus-visible,
+#lead select:focus-visible,
+#lead textarea:focus-visible {
+  box-shadow: inset 0 0 0 1px var(--color-accent) !important;
+}
+
+.rules--cards > li:hover,
+.rules--cards > li:focus-within,
+.rules--tiles > li:hover,
+.rules--tiles > li:focus-within,
+.plans > .plan:hover,
+.plans > .plan:focus-within,
+.faq details:hover,
+.contact dl > div:hover {
+  transform: translateY(-2px);
+}
+
+.connect__rings {
+  background: none;
+}
+
+.connect__rings::before {
+  border-style: solid;
+  border-color: color-mix(in oklab, var(--color-accent) 25%, transparent);
+}
+
+.connect__btn {
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__mandala,
+  .hero__net circle,
+  .aura {
+    animation: none !important;
+  }
+}
