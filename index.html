@@ -63,7 +63,6 @@
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn nav__cta" href="#contact">Get a free demo</a>
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode"></button>
     <button class="nav__toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
@@ -244,8 +243,25 @@
       <div class="hp" aria-hidden="true"><label for="w">Leave this empty</label><input id="w" name="website" tabindex="-1" autocomplete="off"></div>
       <div><label for="n">Your name</label><input id="n" required maxlength="120" autocomplete="name"></div>
       <div><label for="b">Business name</label><input id="b" maxlength="160" autocomplete="organization"></div>
-      <div><label for="t">Business type</label>
-        <select id="t"><option>Bakery</option><option>Cafe</option><option>Restaurant</option><option>Salon / Spa</option><option>Shop</option><option>Other</option></select></div>
+            <div><label for="t-btn" id="t-label">Business type</label>
+        <div class="dd" id="ddType">
+          <input type="hidden" id="t" value="Bakeries">
+          <button class="dd__btn" id="t-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="t-list" aria-labelledby="t-label t-text"><span id="t-text">Bakeries</span></button>
+          <ul class="dd__list" id="t-list" role="listbox" aria-labelledby="t-label">
+            <li role="option" aria-selected="true" data-value="Bakeries">Bakeries</li>
+            <li role="option" aria-selected="false" data-value="Cafes">Cafes</li>
+            <li role="option" aria-selected="false" data-value="Restaurants">Restaurants</li>
+            <li role="option" aria-selected="false" data-value="Fast food and momo shops">Fast food and momo shops</li>
+            <li role="option" aria-selected="false" data-value="Salons and spas">Salons and spas</li>
+            <li role="option" aria-selected="false" data-value="Clinics">Clinics</li>
+            <li role="option" aria-selected="false" data-value="Retail shops">Retail shops</li>
+            <li role="option" aria-selected="false" data-value="Hotels and homestays">Hotels and homestays</li>
+            <li role="option" aria-selected="false" data-value="Tuition and training centres">Tuition and training centres</li>
+            <li role="option" aria-selected="false" data-value="Gym and fitness centres">Gym and fitness centres</li>
+            <li role="option" aria-selected="false" data-value="Other">Other</li>
+          </ul>
+        </div>
+      </div>
       <div><label for="m">What would you like to automate?</label><textarea id="m" rows="3" maxlength="2000"></textarea></div>
       <button class="btn" id="formSend" type="submit">Send on WhatsApp</button>
       <p class="form__status" id="formStatus" role="status" aria-live="polite" hidden></p>
