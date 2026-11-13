@@ -881,7 +881,7 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 .footer__logo { line-height: 0; }
 .footer__logo img { display: block; width: min(11rem, 50vw); height: auto; aspect-ratio: 1; border-radius: 50%; box-shadow: 0 0 0 1px var(--color-rule); }
 /* round NEXAFLOW logo in the header and the loading screen */
-.mark--logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--color-rule), 0 0 20px color-mix(in oklab, var(--color-accent) 40%, transparent); }
+.mark--logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--color-rule); }
 .wordmark:hover .mark--logo { transform: scale(1.08); }
 .loader-logo { width: 96px; height: 96px; }
 .loader-img { display: block; width: 96px; height: 96px; border-radius: 50%; box-shadow: 0 0 28px color-mix(in oklab, var(--color-accent) 45%, transparent); animation: loader-pulse 1.8s ease-in-out infinite; }
