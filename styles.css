@@ -876,3 +876,6 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
     animation: none !important;
   }
 }
+/* NEXAFLOW logo in the footer */
+.footer__logo { line-height: 0; }
+.footer__logo img { display: block; width: min(20rem, 72vw); height: auto; border-radius: var(--radius-md); box-shadow: 0 0 0 1px var(--color-rule); }

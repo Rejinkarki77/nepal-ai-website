@@ -6,7 +6,7 @@ document.documentElement.classList.add("js"); // lets styles hide things only wh
 
 const CONFIG = {
 
-  brand: "Anukar",            // company name
+  brand: "NEXAFLOW",            // company name
 
   whatsapp: "9779800000000",      // number with country code, digits only (977 = Nepal)
 
