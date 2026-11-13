@@ -777,3 +777,10 @@ updateToTop();
   });
 
 })();
+
+/* Click a logo and it spins once */
+document.querySelectorAll(".mark--logo, .footer__logo img").forEach(img => {
+  const link = img.closest("a");
+  link.addEventListener("click", () => { img.classList.remove("logo-spin"); void img.offsetWidth; img.classList.add("logo-spin"); });
+  img.addEventListener("animationend", () => img.classList.remove("logo-spin"));
+});

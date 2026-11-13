@@ -886,3 +886,8 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 .loader-logo { width: 96px; height: 96px; }
 .loader-img { display: block; width: 96px; height: 96px; border-radius: 50%; animation: loader-pulse 1.8s ease-in-out infinite; }
 @media (max-width: 28rem) { .mark--logo { width: 44px; height: 44px; } }
+
+/* logos turn once when clicked */
+@keyframes logo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.logo-spin { animation: logo-spin 0.9s var(--ease-out); }
+@media (prefers-reduced-motion: reduce) { .logo-spin { animation: none; } }
