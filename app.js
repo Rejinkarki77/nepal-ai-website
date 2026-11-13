@@ -164,6 +164,34 @@ form.addEventListener("submit", async e => {
 
 });}
 
+/* ---- business type dropdown ---- */
+(function () {
+  const dd = $("ddType"); if (!dd) return;
+  const btn = $("t-btn"), input = $("t"), text = $("t-text");
+  const opts = [...dd.querySelectorAll('[role="option"]')];
+  let idx = 0;
+  const isOpen = () => dd.classList.contains("is-open");
+  function setOpen(o) { dd.classList.toggle("is-open", o); btn.setAttribute("aria-expanded", String(o)); }
+  function mark(i) { idx = i; opts.forEach((o, k) => o.classList.toggle("is-active", k === i)); opts[i].scrollIntoView({ block: "nearest" }); }
+  function choose(i) { idx = i; opts.forEach((o, k) => o.setAttribute("aria-selected", String(k === i))); input.value = opts[i].dataset.value; text.textContent = opts[i].textContent; }
+  btn.addEventListener("click", () => { const o = !isOpen(); setOpen(o); if (o) mark(idx); });
+  opts.forEach((o, i) => {
+    o.addEventListener("mousemove", () => mark(i));
+    o.addEventListener("click", () => { choose(i); setOpen(false); btn.focus(); });
+  });
+  btn.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      if (!isOpen()) { setOpen(true); mark(idx); return; }
+      mark((idx + (e.key === "ArrowDown" ? 1 : -1) + opts.length) % opts.length);
+    } else if ((e.key === "Enter" || e.key === " ") && isOpen()) { e.preventDefault(); choose(idx); setOpen(false); }
+    else if (e.key === "Escape" && isOpen()) { e.preventDefault(); setOpen(false); }
+    else if (e.key === "Tab") setOpen(false);
+  });
+  document.addEventListener("click", e => { if (!dd.contains(e.target)) setOpen(false); });
+  $("lead").addEventListener("reset", () => setTimeout(() => { choose(0); setOpen(false); }, 0));
+})();
+
 /* ---- live demo ---- */
 
 const DEMOS = {
@@ -342,7 +370,6 @@ updateToTop();
 
   const msgs = [...log.children];
 
-  log.style.minHeight = log.offsetHeight + "px"; // keep the card from growing as messages arrive
 
   msgs.forEach(m => m.classList.add("is-queued"));
 
@@ -356,8 +383,7 @@ updateToTop();
 
   function next() {
 
-    if (i >= msgs.length) { log.style.minHeight = ""; return; }
-
+if (i >= msgs.length) return;
     const m = msgs[i++], bot = m.classList.contains("bubble--bot");
 
     const show = () => { typing.remove(); m.classList.remove("is-queued"); setTimeout(next, bot ? 800 : 500); };
