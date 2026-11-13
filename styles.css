@@ -113,6 +113,20 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px
 input:disabled, select:disabled, textarea:disabled { opacity: 0.55; cursor: not-allowed; }
 .note { font-size: var(--text-sm); color: var(--color-muted); }
 
+/* custom business-type dropdown */
+.dd { position: relative; }
+.dd__btn { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); width: 100%; margin-top: var(--space-2xs); min-height: 48px; padding: var(--space-sm) var(--space-md); border: 0; border-radius: var(--radius-inner); background: color-mix(in oklab, var(--color-paper) 55%, transparent); color: var(--color-ink); font: inherit; text-align: left; cursor: pointer; box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 55%, var(--color-muted)); transition: background-color var(--dur-short) var(--ease-out); }
+.dd__btn:hover { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 65%, transparent); }
+.dd__btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 1px; }
+.dd__btn::after { content: ""; flex: none; width: 8px; height: 8px; border-right: 2px solid var(--color-accent); border-bottom: 2px solid var(--color-accent); transform: rotate(45deg) translateY(-2px); transition: transform var(--dur-short) var(--ease-out); }
+.dd.is-open .dd__btn::after { transform: rotate(225deg) translateY(-2px); }
+.dd__list { position: absolute; left: 0; right: 0; top: calc(100% + var(--space-2xs)); z-index: 5; margin: 0; padding: var(--space-2xs); list-style: none; max-height: 240px; overflow-y: auto; border-radius: var(--radius-inner); background: var(--color-paper-2); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 35%, transparent), var(--shadow-lift); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-10px) scaleY(0.94); transform-origin: top center; transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out), visibility 0s linear var(--dur-short); }
+.dd.is-open .dd__list { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; }
+.dd__list li { padding: var(--space-xs) var(--space-md); border-radius: var(--radius-inner); font-size: var(--text-md); color: var(--color-ink-2); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.dd__list li.is-active { background: color-mix(in oklab, var(--color-accent) 20%, transparent); color: var(--color-ink); }
+.dd__list li[aria-selected="true"] { color: var(--color-accent-hi); font-weight: 600; }
+@media (prefers-reduced-motion: reduce) { .dd__list, .dd__btn::after { transition: none; } }
+
 /* ---------- footer ---------- */
 .footer { border-top: 1px solid var(--color-rule); padding-block: var(--space-2xl) var(--space-3xl); color: var(--color-muted); font-size: var(--text-sm); }
 .footer .wordmark { display: block; margin-bottom: var(--space-md); color: var(--color-ink); font-size: var(--text-xl); }
@@ -384,9 +398,10 @@ input[aria-invalid="true"] { box-shadow: inset 0 0 0 2px var(--color-accent-2); 
 .demo::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2)); }
 .demo:hover, .demo:focus-within { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 45%, transparent), 0 44px 88px -40px color-mix(in oklab, var(--color-accent) 60%, transparent); }
 
-.demo .bubble { transition: translate var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out); }
-.demo .bubble--bot:hover { translate: 4px 0; background: color-mix(in oklab, var(--color-light) 12%, transparent); }
-.demo .bubble--in:hover { translate: -4px 0; background: var(--color-accent-hi); }
+.bubble:not(.typing) { transition: translate var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out); }
+.bubble--bot:not(.typing):hover { translate: 4px 0; background: color-mix(in oklab, var(--color-light) 12%, transparent); }
+.bubble--in:hover { translate: -4px 0; background: var(--color-accent-hi); }
+@media (prefers-reduced-motion: reduce) { .bubble:not(.typing) { transition: none; } .bubble:hover { translate: none; } }
 
 .demo .chat__log .bubble:nth-child(n) { animation-delay: 0s; }
 .demo .chat__log .is-queued { display: none; }
@@ -471,6 +486,7 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 /* header: keep the button and the toggle together, and stop the row squeezing the menu button */
 @media (min-width: 60.01rem) { .nav__links { margin-inline: auto; } }
 .nav__toggle, .nav__cta, .theme-toggle { flex: none; }
+@media (max-width: 60rem) { .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }
 @media (max-width: 28rem) { .nav__cta { display: none; } .theme-toggle { margin-left: auto; } .nav__toggle { margin-left: 0; } }
 .nav__links a { white-space: nowrap; }
 @media (min-width: 60.01rem) and (max-width: 75rem) { .nav__row { gap: var(--space-sm); } .nav__links a:not(.btn) { padding-inline: var(--space-sm); } .nav__cta { margin-left: var(--space-sm); } }
@@ -478,6 +494,7 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 /* ---------- preserved original UI enhancements ---------- */
 /* hero chat: keep bubbles at their natural height while the conversation plays */
 .hero .chat__log { align-content: start; }
+.hero .chat { align-self: start; }
 
 /* hero: nudge the chat card to the right on wide screens */
 @media (min-width: 90.01rem) {
@@ -838,6 +855,41 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 #lead .btn:hover:not(:disabled),
 .connect__rings:hover .connect__btn {
   box-shadow: none !important;
+}
+
+/* focused buttons: outer ring with a gap, shown on hover, focus and keyboard tab */
+.hero__actions .btn,
+.plan .btn {
+  outline: 3px solid transparent;
+  outline-offset: 0;
+  transition: outline-color var(--dur-short) var(--ease-out), outline-offset var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+}
+.hero__actions .btn:hover,
+.hero__actions .btn:focus,
+.hero__actions .btn:focus-visible,
+.plan .btn:hover,
+.plan .btn:focus,
+.plan .btn:focus-visible {
+  outline-color: color-mix(in oklab, var(--color-accent) 60%, transparent);
+  outline-offset: 5px;
+}
+
+#lead input:focus-visible,
+#lead select:focus-visible,
+#lead textarea:focus-visible {
+  box-shadow: inset 0 0 1px var(--color-accent) !important;
+}
+
+
+/* focused buttons: ring with a gap, like the reference */
+.hero__actions .btn:focus-visible,
+.plan .btn:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--color-accent) 60%, transparent);
+  outline-offset: 5px;
+  animation: focus-ring 0.25s var(--ease-out);
+}
+@keyframes focus-ring {
+  from { outline-color: transparent; outline-offset: 0; }
 }
 
 #lead input:focus-visible,
