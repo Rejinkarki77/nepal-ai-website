@@ -884,10 +884,11 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 .mark--logo { display: inline-block; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--color-rule); }
 .wordmark:hover .mark--logo { transform: scale(1.08); }
 .loader-logo { width: 96px; height: 96px; }
-.loader-img { display: block; width: 96px; height: 96px; border-radius: 50%; animation: loader-pulse 1.8s ease-in-out infinite; }
+.loader-img { display: block; width: 96px; height: 96px; border-radius: 50%; animation: loader-spin 2.4s linear infinite; }
 @media (max-width: 28rem) { .mark--logo { width: 44px; height: 44px; } }
 
 /* logos turn once when clicked */
 @keyframes logo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 .logo-spin { animation: logo-spin 0.9s var(--ease-out); }
 @media (prefers-reduced-motion: reduce) { .logo-spin { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .loader-img { animation: none; } }
