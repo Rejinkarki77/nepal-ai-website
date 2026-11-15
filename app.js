@@ -12,7 +12,7 @@ const CONFIG = {
 
   phoneDisplay: "+977-98XXXXXXXX",
 
-  email: "hello@yourbrand.com.np",
+  email: "nexaflownp@gmail.com",
 
   city: "Kathmandu, Nepal",
 
