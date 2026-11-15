@@ -773,35 +773,15 @@ if (i >= msgs.length) return;
 ========================================= */
 
 (() => {
-
   const loader = document.getElementById("pageLoader");
-
   if (!loader) return;
-
-  const minimumDisplayTime = 1000;
-
-  const startTime = performance.now();
-
-  window.addEventListener("load", () => {
-
-    const elapsed = performance.now() - startTime;
-
-    const remaining = Math.max(0, minimumDisplayTime - elapsed);
-
-    setTimeout(() => {
-
-      loader.classList.add("is-loaded");
-
-      setTimeout(() => {
-
-        loader.remove();
-
-      }, 700);
-
-    }, remaining);
-
-  });
-
+  let done = false;
+  const hide = () => { if (done) return; done = true; loader.classList.add("is-loaded"); setTimeout(() => loader.remove(), 700); };
+  // Show the logo briefly, but never keep the page hidden: 0.4 s once the page is ready, 1.2 s at most.
+  const start = performance.now();
+  const ready = () => setTimeout(hide, Math.max(0, 400 - (performance.now() - start)));
+  if (document.readyState !== "loading") ready(); else document.addEventListener("DOMContentLoaded", ready);
+  setTimeout(hide, 1200);
 })();
 
 /* Click a logo and it spins once */
