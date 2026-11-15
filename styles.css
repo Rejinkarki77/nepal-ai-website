@@ -944,3 +944,10 @@ section[tabindex="-1"]:focus, main[tabindex="-1"]:focus { outline: none; }
 .logo-spin { animation: logo-spin 0.9s var(--ease-out); }
 @media (prefers-reduced-motion: reduce) { .logo-spin { animation: none; } }
 @media (prefers-reduced-motion: reduce) { .loader-img { animation: none; } }
+
+/* portfolio page */
+.portfolio-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap-columns); margin-top: var(--space-xl); }
+.portfolio-grid .demo h3 { margin-bottom: var(--space-xs); }
+.portfolio-grid .demo .chat__log { min-height: 0; }
+.portfolio__honest { margin-top: var(--space-lg); max-width: 60ch; }
+@media (max-width: 60rem) { .portfolio-grid { grid-template-columns: minmax(0, 1fr); } }
