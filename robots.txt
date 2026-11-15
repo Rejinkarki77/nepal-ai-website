@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://nepal-ai-website.pages.dev/sitemap.xml
+Sitemap: https://nexaflownp.com/sitemap.xml
