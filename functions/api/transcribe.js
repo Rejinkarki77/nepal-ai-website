@@ -4,7 +4,7 @@
 const MODEL = '@cf/openai/whisper-large-v3-turbo';
 const MAX_BYTES = 1500000; // about 60-90 seconds of speech; the page stops recording much sooner
 
-const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/];
+const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/, /^(www\.)?nexaflownp\.com$/];
 
 const hits = new Map();
 function throttled(ip, limit = 15, windowMs = 60000) {

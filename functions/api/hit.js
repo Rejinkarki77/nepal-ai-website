@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = 'https://svjglbxmeodcfiodupvf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_HdtavQYEN0VP1gEAYQU7vg_xRw2Gvbv';
-const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/];
+const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/, /^(www\.)?nexaflownp\.com$/];
 const BOT = /bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|monitor|curl|wget|python|node-fetch|axios|go-http/i;
 
 const hits = new Map();

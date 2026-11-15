@@ -8,7 +8,7 @@ const SUPABASE_URL = 'https://svjglbxmeodcfiodupvf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_HdtavQYEN0VP1gEAYQU7vg_xRw2Gvbv';
 
 // Only these sites may use the assistant. Add your own domain here when you buy one.
-const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/];
+const ALLOWED_HOSTS = [/^nepal-ai-website\.pages\.dev$/, /^[a-z0-9-]+\.nepal-ai-website\.pages\.dev$/, /^(www\.)?nexaflownp\.com$/];
 
 const SYSTEM = `You are the friendly voice-and-chat assistant on the website of a small company in Nepal that sets up WhatsApp and AI automations for local businesses: bakeries, cafes, restaurants, fast food and momo shops, salons and spas, clinics, retail shops, hotels and homestays, and tuition centres. Speak as "we" for the company.
 
