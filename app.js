@@ -12,7 +12,7 @@ const CONFIG = {
 
   phoneDisplay: "+977-98XXXXXXXX",
 
-  email: "hello@yourbrand.com.np", // placeholder: keeps the email row hidden until a safe address is chosen
+  email: "nexaflownp@gmail.com",
 
   city: "Kathmandu, Nepal",
 
