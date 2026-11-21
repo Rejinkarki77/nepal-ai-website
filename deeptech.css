@@ -300,3 +300,27 @@ p, li, dd { text-wrap: pretty; }
 .ft__bottom p { margin: 0; }
 .ft__bottom a { color: var(--color-muted); }
 @media (max-width: 800px) { .ft__grid { grid-template-columns: 1fr 1fr; } .ft__brand { grid-column: 1 / -1; } }
+
+/* ================= v6: phone fixes ================= */
+@media (max-width: 899px) {
+  #industries .split { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .demo { max-width: none; margin-inline: 0; }
+  .notlisted { max-width: none; }
+  .trades { margin-bottom: var(--space-lg); }
+  .ft { margin-top: 56px; }
+  .ft__wave { height: 56px; }
+}
+@media (max-width: 560px) {
+  .wa-head { padding: var(--space-sm) var(--space-md); }
+  .wa-badge { display: none; }
+  .demo .chat__log { min-height: 0; padding: var(--space-md); }
+  .chat--hero .chat__head span { font-size: var(--text-xs); }
+  .hero__copy h1 { font-size: clamp(2.1rem, 9.5vw, 2.8rem); max-width: none; }
+  .hero__actions .btn { width: 100%; }
+  .trades [role="tab"] { min-height: 44px; }
+  .ft__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); }
+  .ft__bottom { flex-direction: column; }
+  .nav__row { gap: var(--space-xs); }
+  .wordmark span[data-brand] { font-size: 1.05rem; }
+}
+@media (max-width: 380px) { .lang-link { padding-inline: var(--space-sm); } }
