@@ -324,3 +324,7 @@ p, li, dd { text-wrap: pretty; }
   .wordmark span[data-brand] { font-size: 1.05rem; }
 }
 @media (max-width: 380px) { .lang-link { padding-inline: var(--space-sm); } }
+
+/* wave: stroke only the curve, never the straight edges */
+.ft__w path:first-child { stroke: none; }
+.ft__w .ft__line { fill: none; }
