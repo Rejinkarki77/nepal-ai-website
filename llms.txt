@@ -1,0 +1,22 @@
+# NEXAFLOW
+
+> NEXAFLOW is a new Nepal company that sets up WhatsApp and AI automation for bakeries, cafes, restaurants, hotels and shops: instant replies to customer questions, order taking, bookings, review requests and daily reports, in English, Nepali and Romanized Nepali. A real person can take over any chat at any time. Based in Kathmandu, Nepal. Owner: Rejin Karki.
+
+## Main pages
+- [Home (English)](https://nexaflownp.com/): what NEXAFLOW does, how it works, packages and FAQ
+- [Home (Nepali)](https://nexaflownp.com/ne/): the same in Nepali
+- [Portfolio](https://nexaflownp.com/portfolio/): what we build, sample chats, how we work
+- [Privacy policy](https://nexaflownp.com/privacy/): what the site collects and why
+
+## What we do
+- WhatsApp auto-replies for menu, hours, location and delivery questions
+- Order taking and table, room or appointment bookings
+- Instagram and Facebook inbox replies
+- Offers and festival messages to customers who agreed to receive them
+- Review and feedback requests, stock alerts and daily reports
+- Custom automation for other repeat jobs
+
+## Facts
+- Packages: Starter, Growth and Full automation. Prices are quoted after a short free call.
+- Languages: English, Nepali and Romanized Nepali.
+- Contact: use the form at https://nexaflownp.com/#contact

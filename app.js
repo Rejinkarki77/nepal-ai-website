@@ -234,24 +234,6 @@ tabs.forEach((t,i)=>{
 
 });
 
-/* ---- search engines: business details from CONFIG ---- */
-
-if (!PLACEHOLDER.brand) {
-
-  const ld=document.createElement("script"); ld.type="application/ld+json";
-
-  const org={"@context":"https://schema.org","@type":"ProfessionalService",name:CONFIG.brand,url:location.origin+"/",description:"WhatsApp and AI automation for bakeries, cafes, restaurants and shops in Nepal.",areaServed:{"@type":"Country",name:"Nepal"},address:{"@type":"PostalAddress",addressLocality:CONFIG.city}};
-
-  if(!PLACEHOLDER.email) org.email=CONFIG.email;
-
-  if(!PLACEHOLDER.phone) org.telephone=CONFIG.phoneDisplay;
-
-  ld.textContent=JSON.stringify(org);
-
-  document.head.append(ld);
-
-}
-
 window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
 
 document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });
