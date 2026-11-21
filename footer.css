@@ -41,3 +41,14 @@
 @media (max-width: 560px) { .ft__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-lg); } .ft__bottom { flex-direction: column; } }
 .ft__grid--3 { grid-template-columns: 2fr 1fr 1fr; }
 @media (max-width: 800px) { .ft__grid--3 { grid-template-columns: 1fr 1fr; } }
+
+
+/* ===== one thin moving wave line on the footer edge (replaces the big wave) ===== */
+.ft { margin-top: 40px; }
+.ft__wave { height: 24px; bottom: calc(100% - 12px); margin-bottom: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); }
+.ft__w { left: 0; bottom: 0; width: 200%; height: 100%; transform: none; fill: none; will-change: transform; }
+.ft__w .ft__line { fill: none; stroke: url(#ftg); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.ft__w--back, .ft__w--front { animation: none; }
+@media (prefers-reduced-motion: no-preference) { .ft__w { animation: ft-ltr 14s linear infinite; } }
+@media (max-width: 899px) { .ft { margin-top: 32px; } .ft__wave { height: 24px; } }
