@@ -195,20 +195,21 @@ form.addEventListener("submit", async e => {
 /* ---- live demo ---- */
 
 const DEMOS = {
-
-  bakery: [["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in"," 1 kg chocolate cake, bholi 4 baje."],["bot","Noted: 1 kg chocolate cake, pickup tomorrow at 4 PM. We will remind you.",1]],
-
-  cafe: [["in","Aaja rati 7 baje 4 jana ko table huncha?"],["bot","Yes, a table for 4 at 7 PM is free. What name should I put it under?"],["in","Prakash"],["bot","Booked: Prakash, 4 people, 7 PM tonight. We will remind you at 5 PM.",1]],
-
-  restaurant: [["in","Veg momo ra chowmein delivery huncha?"],["bot","Yes, we deliver nearby. Veg momo and chowmein added. What is your delivery address?"],["in","Baneshwor, near the temple"],["bot","Thank you! Your order is with the kitchen. We will message you when it leaves.",1]],
-
-  salon: [["in","Haircut ko lagi aaja 4 baje slot chha?"],["bot","Yes, 4 PM is free. Shall I book it for you?"],["in","yes"],["bot","Booked for 4 PM today. See you soon!",1]]
-
+  bakery: ["Sunrise Bakery",[["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in","1 kg chocolate cake, bholi 4 baje."],["bot","Noted: 1 kg chocolate cake, pickup tomorrow at 4 PM. We will remind you.",1]]],
+  cafe: ["Himal Cafe",[["in","Aaja rati 7 baje 4 jana ko table huncha?"],["bot","Yes, a table for 4 at 7 PM is free. What name should I put it under?"],["in","Prakash"],["bot","Booked: Prakash, 4 people, 7 PM tonight. We will remind you at 5 PM.",1]]],
+  restaurant: ["Newa Kitchen",[["in","Aaja dinner ko lagi set menu chha?"],["bot","Yes! Today's set: dal bhat, two curries, pickle and papad. Would you like to order or book a table?"],["in","2 set, 8 baje aauchhu"],["bot","Booked 2 sets for 8 PM. The kitchen will have them ready.",1]]],
+  momo: ["Momo Corner",[["in","Veg momo ra chowmein delivery huncha?"],["bot","Yes, we deliver nearby. Veg momo and chowmein added. What is your delivery address?"],["in","Baneshwor, near the temple"],["bot","Thank you! Your order is with the kitchen. We will message you when it leaves.",1]]],
+  salon: ["Glow Salon",[["in","Haircut ko lagi aaja 4 baje slot chha?"],["bot","Yes, 4 PM is free. Shall I book it for you?"],["in","yes"],["bot","Booked for 4 PM today. See you soon!",1]]],
+  clinic: ["City Dental Clinic",[["in","Doctor le aaja appointment dinuhuncha?"],["bot","Yes. Doctor is free at 11 AM and 3 PM today. Which time suits you?"],["in","3 baje"],["bot","Booked for 3 PM. We will send a reminder 2 hours before.",1]]],
+  retail: ["Kathmandu Mart",[["in","Yo kurta ko size M ra L chha?"],["bot","Size M and L are both in stock. Price is Rs. 1,500. Would you like to reserve one?"],["in","L ek ota rakhidinu"],["bot","Reserved: 1 kurta, size L. Please collect it by 7 PM today.",1]]],
+  hotel: ["Lake View Homestay",[["in","Shanibar ko lagi 2 jana ko room khali chha?"],["bot","Yes, a double room is free this Saturday. Breakfast is included. Shall I hold it?"],["in","Hajur, hold garnuhos"],["bot","Room held for Saturday. Please confirm within 24 hours and we will send directions.",1]]],
+  tuition: ["Bright Tuition Centre",[["in","Class 10 ko maths batch kahile suru huncha?"],["bot","The new Class 10 maths batch starts on Sunday at 7 AM. Would you like to reserve a seat?"],["in","Ho, mero chhora ko lagi"],["bot","Seat reserved. We will message you the fee details and first-day schedule.",1]]],
+  gym: ["Core Fitness",[["in","Monthly membership kati parchha?"],["bot","Monthly membership details are on our price list. Would you like a free trial day first?"],["in","Ho, bholi"],["bot","Trial booked for tomorrow at 6 AM. Please bring a towel and water.",1]]]
 };
 
 const demoLog = document.getElementById("demo-log");
 
-const tabs = [...document.querySelectorAll("[data-demo]")];
+const tabs = [...document.querySelectorAll(".trades [data-demo]")];
 
 function showDemo(key){
 
@@ -216,7 +217,11 @@ function showDemo(key){
 
   demoLog.setAttribute("aria-labelledby", "tab-"+key);
 
-  demoLog.replaceChildren(...DEMOS[key].map(([who,text,done])=>{
+  const [wname, msgs] = DEMOS[key];
+
+  if ($("waName")) { $("waName").textContent = wname; $("waAv").textContent = wname[0]; }
+
+  demoLog.replaceChildren(...msgs.map(([who,text,done])=>{
 
     const p=document.createElement("p"); p.className="bubble bubble--"+who+(done?" bubble--done":"");
 
@@ -230,7 +235,7 @@ tabs.forEach((t,i)=>{
 
   t.addEventListener("click",()=>showDemo(t.dataset.demo));
 
-  t.addEventListener("keydown",e=>{ const d={ArrowRight:1,ArrowLeft:-1}[e.key]; if(!d) return; const n=tabs[(i+d+tabs.length)%tabs.length]; n.focus(); showDemo(n.dataset.demo); });
+  t.addEventListener("keydown",e=>{ if(["ArrowDown","ArrowUp"].includes(e.key)) e.preventDefault(); const d={ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1}[e.key]; if(!d) return; const n=tabs[(i+d+tabs.length)%tabs.length]; n.focus(); showDemo(n.dataset.demo); });
 
 });
 
@@ -374,7 +379,7 @@ if (i >= msgs.length) return;
 
   }
 
-  setTimeout(next, 700);
+  const go = () => setTimeout(next, 900); if (document.documentElement.classList.contains("fx") && !document.querySelector(".hero.is-live")) window.addEventListener("nf:live", go, { once: true }); else go();
 
 })();
 
@@ -386,13 +391,15 @@ if (i >= msgs.length) return;
 
   const log = document.getElementById("demo-log");
 
-  const bar = document.querySelector(".demo__tabs");
+  const bar = document.querySelector(".trades");
 
   if (!sec || !log || !bar) return;
 
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  const pills = [...sec.querySelectorAll(".trades li")];
+  const pills = [...sec.querySelectorAll(".trades li")]; // pills = business buttons
+
+  const demoBox = document.getElementById("demo");
 
   const typing = document.createElement("p");
 
@@ -430,7 +437,15 @@ if (i >= msgs.length) return;
 
   }
 
-  function onTab() { const now = picked(); if (now && now !== current) { current = now; play(); } }
+  function onTab() {
+
+    const now = picked();
+
+    if (!calm && !started) { current = now; start(); return; }
+
+    if (now && now !== current) { current = now; if (demoBox) { demoBox.classList.remove("is-switching"); void demoBox.offsetWidth; demoBox.classList.add("is-switching"); } play(); }
+
+  }
 
   bar.addEventListener("click", onTab);
 
@@ -447,6 +462,8 @@ if (i >= msgs.length) return;
   function start() {
 
     if (started) return; started = true;
+
+    if (demoBox) demoBox.classList.add("is-open");
 
     pills.forEach((p, k) => setTimeout(() => p.classList.remove("pill-wait"), k * 70));
 

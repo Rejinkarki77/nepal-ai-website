@@ -4,7 +4,9 @@
    - A visitor taps the sun/moon button: their choice is applied and remembered in this browser. */
 (function () {
   var KEY = "theme", root = document.documentElement;
-  var COLORS = { dark: "#10131c", light: "#f7f8fb" };
+  // entrance animations only when the visitor has not asked for reduced motion (set before first paint)
+  if (!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) root.classList.add("fx");
+  var COLORS = { dark: "#0b0f19", light: "#f6f7f9" };
 
   function saved() { try { var v = localStorage.getItem(KEY); return v === "light" || v === "dark" ? v : null; } catch (e) { return null; } }
   function system() { return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; }

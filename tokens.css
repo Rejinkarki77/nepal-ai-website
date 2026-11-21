@@ -6,20 +6,20 @@
   --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(72% 0.15 27); --color-success: oklch(76% 0.13 150);
+  --color-error: oklch(72% 0.15 27); --color-success: oklch(74% 0.170 150);
   --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  --color-paper: oklch(17.5% 0.014 268); --color-paper-2: oklch(21% 0.016 268); --color-paper-3: oklch(25% 0.017 268);
-  --color-ink: oklch(96% 0.006 75); --color-ink-2: oklch(85% 0.010 262); --color-muted: oklch(70% 0.016 262);
-  --color-rule: oklch(30% 0.016 266); --color-light: oklch(100% 0 0); --color-shade: oklch(10% 0.022 268);
-  --color-accent: oklch(77% 0.10 274); --color-accent-ink: oklch(19% 0.035 274); --color-accent-hi: oklch(84% 0.085 274);
-  --color-accent-deep: oklch(44% 0.13 274); --color-accent-soft: oklch(91% 0.038 274); --color-focus: oklch(80% 0.10 274);
-  --color-accent-2: oklch(83% 0.095 62); --color-dusk: oklch(70% 0.12 330);
+  --color-paper: oklch(15% 0.026 265); --color-paper-2: oklch(20% 0.030 262); --color-paper-3: oklch(25% 0.032 260);
+  --color-ink: oklch(93% 0.006 265); --color-ink-2: oklch(83% 0.010 262); --color-muted: oklch(71% 0.016 262);
+  --color-rule: oklch(32% 0.026 262); --color-light: oklch(100% 0 0); --color-shade: oklch(10% 0.024 265);
+  --color-accent: oklch(74% 0.170 60); --color-accent-ink: oklch(17% 0.040 60); --color-accent-hi: oklch(83% 0.140 70);
+  --color-accent-deep: oklch(60% 0.180 52); --color-accent-soft: oklch(93% 0.045 70); --color-focus: oklch(82% 0.140 70);
+  --color-accent-2: oklch(72% 0.190 150); --color-dusk: oklch(62% 0.140 255);
   --color-day-ink: oklch(22% 0.022 268); --color-day-muted: oklch(38% 0.022 266); --color-fog: oklch(94% 0.012 70);
   --color-well: oklch(95.5% 0.008 75); --color-well-2: oklch(92% 0.010 75); --color-well-ink: oklch(21% 0.016 268); --color-well-muted: oklch(47% 0.016 265); --color-well-rule: oklch(87.5% 0.009 75); --color-card: oklch(99.5% 0.003 75);
-  --glass: oklch(22% 0.018 268 / 0.58); --glass-blur: 22px;
+  --glass: oklch(21% 0.028 262 / 0.62); --glass-blur: 22px;
   --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.10), inset 0 0 0 1px oklch(100% 0 0 / 0.06);
-  --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.06) inset, 0 40px 80px -32px oklch(8% 0.02 268 / 0.7);
+  --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.06) inset, 0 40px 80px -32px oklch(8% 0.03 265 / 0.75);
   --shadow-rest: 0 2px 10px oklch(0% 0 0 / 0.08);
   --shadow-lift: 0 3px 12px oklch(0% 0 0 / 0.10);
   --font-display: "Wix Madefor Display", ui-sans-serif, system-ui, sans-serif; --font-body: "Wix Madefor Text", ui-sans-serif, system-ui, sans-serif;
@@ -30,13 +30,13 @@
 /* ---------- light mode: the same hues, every colour re-derived. Dark stays the default. ---------- */
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-paper: oklch(98.5% 0.006 268); --color-paper-2: oklch(96% 0.008 268); --color-paper-3: oklch(93% 0.010 268);
-  --color-ink: oklch(21% 0.020 268); --color-ink-2: oklch(36% 0.020 266); --color-muted: oklch(48% 0.018 264);
-  --color-rule: oklch(88% 0.010 266); --color-light: oklch(20% 0.020 268); --color-shade: oklch(40% 0.030 268);
-  --color-accent: oklch(52% 0.150 274); --color-accent-ink: oklch(99% 0.005 274); --color-accent-hi: oklch(46% 0.160 274);
-  --color-accent-deep: oklch(40% 0.140 274); --color-accent-soft: oklch(94% 0.030 274); --color-focus: oklch(50% 0.170 274);
-  --color-accent-2: oklch(66% 0.140 58); --color-dusk: oklch(60% 0.150 330);
-  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.130 150);
+  --color-paper: oklch(98.5% 0.004 260); --color-paper-2: oklch(96% 0.006 260); --color-paper-3: oklch(93% 0.008 260);
+  --color-ink: oklch(20% 0.030 262); --color-ink-2: oklch(34% 0.026 262); --color-muted: oklch(46% 0.020 262);
+  --color-rule: oklch(88% 0.010 262); --color-light: oklch(20% 0.030 262); --color-shade: oklch(40% 0.030 262);
+  --color-accent: oklch(72% 0.170 60); --color-accent-ink: oklch(17% 0.040 60); --color-accent-hi: oklch(63% 0.170 52);
+  --color-accent-deep: oklch(48% 0.150 48); --color-accent-soft: oklch(95% 0.035 70); --color-focus: oklch(55% 0.170 52);
+  --color-accent-2: oklch(58% 0.150 150); --color-dusk: oklch(55% 0.150 255);
+  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.150 150);
   --glass: oklch(100% 0 0 / 0.66);
   --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.90), inset 0 0 0 1px oklch(30% 0.020 268 / 0.08);
   --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.70) inset, 0 30px 60px -34px oklch(30% 0.040 268 / 0.28);
@@ -44,13 +44,13 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
   color-scheme: light;
-  --color-paper: oklch(98.5% 0.006 268); --color-paper-2: oklch(96% 0.008 268); --color-paper-3: oklch(93% 0.010 268);
-  --color-ink: oklch(21% 0.020 268); --color-ink-2: oklch(36% 0.020 266); --color-muted: oklch(48% 0.018 264);
-  --color-rule: oklch(88% 0.010 266); --color-light: oklch(20% 0.020 268); --color-shade: oklch(40% 0.030 268);
-  --color-accent: oklch(52% 0.150 274); --color-accent-ink: oklch(99% 0.005 274); --color-accent-hi: oklch(46% 0.160 274);
-  --color-accent-deep: oklch(40% 0.140 274); --color-accent-soft: oklch(94% 0.030 274); --color-focus: oklch(50% 0.170 274);
-  --color-accent-2: oklch(66% 0.140 58); --color-dusk: oklch(60% 0.150 330);
-  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.130 150);
+  --color-paper: oklch(98.5% 0.004 260); --color-paper-2: oklch(96% 0.006 260); --color-paper-3: oklch(93% 0.008 260);
+  --color-ink: oklch(20% 0.030 262); --color-ink-2: oklch(34% 0.026 262); --color-muted: oklch(46% 0.020 262);
+  --color-rule: oklch(88% 0.010 262); --color-light: oklch(20% 0.030 262); --color-shade: oklch(40% 0.030 262);
+  --color-accent: oklch(72% 0.170 60); --color-accent-ink: oklch(17% 0.040 60); --color-accent-hi: oklch(63% 0.170 52);
+  --color-accent-deep: oklch(48% 0.150 48); --color-accent-soft: oklch(95% 0.035 70); --color-focus: oklch(55% 0.170 52);
+  --color-accent-2: oklch(58% 0.150 150); --color-dusk: oklch(55% 0.150 255);
+  --color-error: oklch(52% 0.170 27); --color-success: oklch(55% 0.150 150);
   --glass: oklch(100% 0 0 / 0.66);
   --glass-hi: inset 0 1px 0 oklch(100% 0 0 / 0.90), inset 0 0 0 1px oklch(30% 0.020 268 / 0.08);
   --shadow-card: 0 1px 0 oklch(100% 0 0 / 0.70) inset, 0 30px 60px -34px oklch(30% 0.040 268 / 0.28);

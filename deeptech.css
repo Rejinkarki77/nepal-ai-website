@@ -1,0 +1,152 @@
+/* Deep Tech layer: orange on deep navy, circuit lines that flow, 3D depth, and entrance effects.
+   Smoothness rules: only transform, translate, scale and opacity are animated; everything pauses off-screen;
+   reduced-motion visitors get none of the movement; low-power devices get a lighter version (.fx-lite). */
+
+:root {
+  --dt-accent-text: var(--color-accent);
+  --dt-glow: 0 0 0 1px color-mix(in oklab, var(--color-accent) 40%, transparent), 0 16px 44px -16px color-mix(in oklab, var(--color-accent) 55%, transparent);
+  --dt-lift: 0 26px 50px -24px oklch(5% 0.03 265 / 0.85);
+  --dt-persp: 900px;
+}
+:root[data-theme="light"] { --dt-accent-text: var(--color-accent-deep); --dt-lift: 0 22px 44px -26px oklch(30% 0.04 262 / 0.35); }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) { --dt-accent-text: var(--color-accent-deep); --dt-lift: 0 22px 44px -26px oklch(30% 0.04 262 / 0.35); } }
+
+/* ---------- header: menu in the middle, demo button on the right ---------- */
+.nav__links { margin-inline: auto; }
+.nav__cta { margin-left: 0; min-height: 44px; padding-inline: var(--space-lg); }
+@media (max-width: 960px) { .nav__row > .nav__cta { display: none; } }
+
+/* ---------- hero ---------- */
+.eyebrow { margin: 0 0 var(--space-md); color: var(--dt-accent-text); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.hl { color: var(--dt-accent-text); }
+.hero__copy h1 { max-width: 14ch; }
+.hero__scrim { background:
+  radial-gradient(ellipse 46% 62% at 80% 42%, color-mix(in oklab, var(--color-accent) 13%, transparent), transparent 70%),
+  radial-gradient(ellipse 58% 70% at 14% 60%, color-mix(in oklab, var(--color-dusk) 16%, transparent), transparent 72%),
+  linear-gradient(to bottom, transparent 70%, var(--color-paper)); }
+.hero__proof li { color: var(--color-ink-2); background: color-mix(in oklab, var(--color-light) 6%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 12%, transparent); }
+.hero__proof li::before { background: var(--color-accent-2); }
+.hero__proof li:hover { background: color-mix(in oklab, var(--color-light) 10%, transparent); }
+
+/* circuit lines: blue base network, orange signals running along it */
+.hero__net { -webkit-mask-image: linear-gradient(90deg, transparent 0%, var(--color-paper) 38%); mask-image: linear-gradient(90deg, transparent 0%, var(--color-paper) 38%); }
+.hero__net line { stroke: var(--color-dusk); stroke-opacity: 0.38; stroke-width: 1.1; }
+.hero__net .sig { stroke: var(--color-accent); stroke-opacity: 0.95; stroke-width: 2.1; stroke-linecap: round; stroke-dasharray: 16 150; }
+.hero__net circle { fill: var(--color-accent-hi); opacity: 0.8; }
+.hero__net .warm { fill: var(--color-accent); }
+
+/* ---------- chat cards ---------- */
+.chat--hero, .demo { border: 1px solid color-mix(in oklab, var(--color-accent) 22%, transparent); }
+.glass { -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
+.fx-lite .glass { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--color-paper-2); }
+.bubble--bot { background: color-mix(in oklab, var(--color-light) 8%, var(--color-paper-2)); }
+.bubble--done { border-left-color: var(--color-accent-2); }
+
+/* ---------- services: full-width grid of cards ---------- */
+.services { display: grid; gap: var(--space-xl); }
+.services__head { max-width: 46rem; margin-inline: auto; text-align: center; }
+.services__head .lead { max-width: none; margin-top: var(--space-md); color: var(--color-muted); }
+.services .rules--cards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-md); }
+.services .rules--cards > li { padding: var(--space-lg); border-radius: var(--radius-card); overflow: visible;
+  background: linear-gradient(160deg, var(--color-paper-3), var(--color-paper-2)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 9%, transparent); }
+.services .rules--cards > li::before { display: none; }
+.services .rules--cards > li:hover, .services .rules--cards > li:focus-within { background: linear-gradient(160deg, var(--color-paper-3), var(--color-paper-2)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 55%, transparent); }
+.services .rules--cards h3 { margin-top: var(--space-xs); }
+.services .svc-icon { background: color-mix(in oklab, var(--color-accent) 16%, transparent); }
+.services .svc-icon svg { stroke: var(--color-accent); }
+@media (max-width: 1100px) { .services .rules--cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .services .rules--cards { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- business types: buttons on the left, phone-style chat on the right ---------- */
+#industries .split { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: center; }
+.trades { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xs); margin: var(--space-lg) 0 0; padding: 0; list-style: none; }
+.trades [role="tab"] { appearance: none; display: flex; align-items: center; gap: var(--space-xs); width: 100%; min-height: 48px; padding: 0 var(--space-md); border: 0; border-radius: var(--radius-inner);
+  font: inherit; font-size: var(--text-sm); font-weight: 500; text-align: left; color: var(--color-ink-2); cursor: pointer;
+  background: color-mix(in oklab, var(--color-light) 5%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 11%, transparent);
+  transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out); }
+.trades [role="tab"]::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--color-rule); transition: background-color var(--dur-short); }
+.trades [role="tab"]:hover { transform: translateY(-2px); color: var(--color-ink); background: color-mix(in oklab, var(--color-light) 9%, transparent); }
+.trades [role="tab"]:active { transform: scale(0.97); }
+.trades [role="tab"]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.trades [role="tab"][aria-selected="true"] { background: var(--color-accent); color: var(--color-accent-ink); font-weight: 600; box-shadow: var(--dt-glow); }
+.trades [role="tab"][aria-selected="true"]::before { background: var(--color-accent-ink); }
+.trades .pill-wait { opacity: 0; transform: translateY(10px) scale(0.96); }
+@media (max-width: 520px) { .trades { grid-template-columns: minmax(0, 1fr); } }
+
+.demo { position: relative; width: 100%; max-width: 480px; margin-inline: auto; padding: 0; overflow: hidden; border-radius: 28px; }
+.wa-head { display: flex; align-items: center; gap: var(--space-sm); padding: var(--space-md) var(--space-lg); background: color-mix(in oklab, var(--color-accent-2) 20%, var(--color-paper-2)); }
+.wa-av { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent); color: var(--color-accent-ink); font-weight: 700; }
+.wa-head strong { display: block; line-height: 1.2; font-weight: 600; }
+.wa-head small { display: flex; align-items: center; gap: 6px; color: var(--color-ink-2); font-size: var(--text-xs); }
+.wa-head small::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent-2); }
+.wa-badge { margin-left: auto; font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.04em; color: var(--color-accent-2); }
+.demo .chat__log { min-height: 350px; padding: var(--space-md) var(--space-lg); align-content: start; }
+.demo .demo__note { margin: 0; padding: 0 var(--space-lg) var(--space-md); }
+
+/* ---------- plans ---------- */
+.plan { border-radius: var(--radius-card); background: linear-gradient(160deg, var(--color-paper-3), var(--color-paper-2)); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 9%, transparent); }
+.plan--feat { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 60%, transparent); }
+
+/* ---------- buttons: ripple + glow ---------- */
+.btn { position: relative; overflow: hidden; }
+.btn:not(.btn--quiet):hover { box-shadow: var(--dt-glow) !important; }
+.fx-ripple { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: currentColor; opacity: 0.28; pointer-events: none; }
+.fx-spark { position: fixed; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; background: var(--color-accent); pointer-events: none; z-index: 1000; }
+.fx-spark:nth-child(odd) { background: var(--color-accent-hi); }
+.fx-spark:nth-child(3n) { background: var(--color-accent-2); }
+
+/* ---------- long sections load lazily ---------- */
+#how, #pricing, #faq, #contact { content-visibility: auto; contain-intrinsic-size: auto 720px; }
+
+/* ---------- motion (only for visitors who have not asked for less) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dt-flow { to { stroke-dashoffset: -166; } }
+  @keyframes dt-twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+  .hero__net .sig { animation: dt-flow 4.6s linear infinite; }
+  .hero__net .sig.s2 { animation-duration: 6.2s; animation-delay: -2.1s; }
+  .hero__net .sig.s3 { animation-duration: 5.3s; animation-delay: -3.7s; }
+  .hero__net .pulse { animation: dt-twinkle 3.4s ease-in-out infinite; }
+  .hero.is-paused .hero__net .sig, .hero.is-paused .hero__net .pulse { animation-play-state: paused; }
+
+  /* hero chat pops up once the page has loaded */
+  @keyframes dt-pop { from { opacity: 0; translate: 0 40px; scale: 0.93; } to { opacity: 1; translate: 0 0; scale: 1; } }
+  .fx .hero:not(.is-live) .chat--hero { opacity: 0; }
+  .fx .hero.is-live .chat--hero { animation: dt-pop 0.95s var(--ease-out) both; }
+
+  /* business-type chat pops up when its section scrolls into view, and again on every pick */
+  .fx .demo:not(.is-open) { opacity: 0; }
+  .fx .demo.is-open { animation: dt-pop 0.85s var(--ease-out) both; }
+  @keyframes dt-switch { from { scale: 0.965; } to { scale: 1; } }
+  .fx .demo.is-switching { animation: dt-switch 0.4s var(--ease-out) both; }
+
+  /* scroll reveal */
+  .fx-r { opacity: 0; translate: 0 26px; transition: opacity 0.6s var(--ease-out), translate 0.6s var(--ease-out); }
+  .fx-r.is-in { opacity: 1; translate: 0 0; }
+
+  /* click effect */
+  @keyframes dt-ripple { to { transform: scale(30); opacity: 0; } }
+  @keyframes dt-spark { to { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; } }
+  .fx-ripple { animation: dt-ripple 0.65s ease-out forwards; }
+  .fx-spark { animation: dt-spark 0.7s var(--ease-out) forwards; }
+  .btn.is-sent { animation: dt-bump 0.45s var(--ease-out); }
+  @keyframes dt-bump { 40% { scale: 1.05; } }
+
+  /* 3D tilt toward the pointer (mouse only), parallax depth in the hero */
+  .fx-tilt-on [data-tilt] { position: relative; transform-style: preserve-3d;
+    transform: perspective(var(--dt-persp)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) !important;
+    transition: transform 0.5s var(--ease-out), translate 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), background-color 0.3s !important; }
+  .fx-tilt-on [data-tilt].is-tilting { transition: transform 0.08s linear, translate 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), background-color 0.3s !important; will-change: transform; box-shadow: var(--dt-lift); }
+  .fx-tilt-on [data-tilt]:hover { translate: 0 -5px; }
+  .fx-tilt-on [data-tilt]::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--color-light) 16%, transparent), transparent 58%); }
+  .fx-tilt-on [data-tilt].is-tilting::after { opacity: 1; }
+  .fx-tilt-on .services .rules--cards > li .svc-icon { transform: translateZ(26px); }
+  .fx-tilt-on .services .rules--cards > li h3 { transform: translateZ(16px); }
+  .fx-tilt-on .chat--hero .chat__head { transform: translateZ(18px); }
+  .hero.fx-parallax .hero__net { transform: translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -10px), 0); transition: transform 0.6s var(--ease-out); }
+  .hero.fx-parallax .hero__mandala { translate: calc(var(--px, 0) * 10px) calc(var(--py, 0) * 8px); transition: translate 0.8s var(--ease-out); }
+}
+
+.svc-icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; }
+.svc-icon svg { stroke: var(--color-accent); }
+.trades li { padding: 0; border: 0; background: none; box-shadow: none; }
