@@ -14,6 +14,14 @@
   /* ---- circuit lines: tag a few extra signal lines and twinkling nodes (marked here to keep the HTML small) ---- */
   const sigs = [...document.querySelectorAll(".hero__net .sig")];
   sigs.forEach((l, i) => { if (i % 3 === 1) l.classList.add("s2"); if (i % 3 === 2) l.classList.add("s3"); });
+  /* more current: every 4th wire carries a signal; each signal gets a soft wide copy underneath as its glow */
+  const wires = [...document.querySelectorAll(".hero__net g:first-child line")];
+  wires.forEach((l, i) => { if (i % 4 === 3 && !l.classList.contains("sig")) l.classList.add("sig", i % 8 === 3 ? "s2" : "s3"); });
+  const g = wires.length && wires[0].parentNode;
+  [...document.querySelectorAll(".hero__net .sig")].forEach((l, i) => {
+    if (i % 2) l.classList.add("e-blue");
+    if (g && !lite) { const c = l.cloneNode(); c.classList.add("e-glow"); c.classList.remove("sig"); g.insertBefore(c, l); }
+  });
   document.querySelectorAll(".hero__net circle").forEach((c, i) => { if (i % 4 === 0) c.classList.add("pulse"); });
 
   /* ---- hero chat pops up once the page has loaded (after the logo screen) ---- */

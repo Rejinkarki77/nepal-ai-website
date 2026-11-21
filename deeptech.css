@@ -162,3 +162,19 @@
 .hl { white-space: nowrap; }
 .hero__actions .btn--ghost { min-height: 52px; padding-inline: var(--space-lg); border-radius: var(--radius-btn, 999px); }
 .btn.btn--ghost { border: 1.5px solid var(--color-accent) !important; box-shadow: none !important; }
+
+/* ---------- electric background: no mandala rings, live current along the circuit ---------- */
+.hero__mandala, .mandala-bg, .has-mandala > svg { display: none !important; }
+.hero__net { -webkit-mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 35%, transparent) 0%, var(--color-paper) 45%); mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 35%, transparent) 0%, var(--color-paper) 45%); }
+.hero__net line { stroke-opacity: 0.45; }
+.hero__net .sig { stroke: var(--color-accent-hi); stroke-width: 2.4; stroke-dasharray: 22 120; }
+.hero__net .sig.e-blue { stroke: oklch(82% 0.12 235); }
+.hero__net .e-glow { stroke-width: 9; stroke-opacity: 0.22; stroke-dasharray: 22 120; stroke-linecap: round; }
+.hero__net .e-glow.e-blue { stroke: oklch(70% 0.14 245); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dt-zap { 0%, 100% { opacity: 1; } 47% { opacity: 1; } 50% { opacity: 0.35; } 53% { opacity: 1; } 78% { opacity: 0.6; } 80% { opacity: 1; } }
+  .hero__net .sig, .hero__net .e-glow { animation: dt-flow 3.2s linear infinite, dt-zap 4.7s steps(1, end) infinite; }
+  .hero__net .sig.s2, .hero__net .e-glow.s2 { animation-duration: 4.3s, 3.9s; animation-delay: -1.4s, -0.6s; }
+  .hero__net .sig.s3, .hero__net .e-glow.s3 { animation-duration: 3.7s, 5.3s; animation-delay: -2.6s, -2s; }
+  .hero.is-paused .hero__net .e-glow { animation-play-state: paused; }
+}
