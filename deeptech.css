@@ -178,3 +178,55 @@
   .hero__net .sig.s3, .hero__net .e-glow.s3 { animation-duration: 3.7s, 5.3s; animation-delay: -2.6s, -2s; }
   .hero.is-paused .hero__net .e-glow { animation-play-state: paused; }
 }
+
+/* ================= v2 ================= */
+/* hero, left side: clean. No chips, no glow, no label. */
+.hero__proof, .eyebrow { display: none !important; }
+.hero__scrim { background: linear-gradient(to bottom, transparent 75%, var(--color-paper)); }
+.hero__actions .btn, .btn:not(.btn--quiet):hover { box-shadow: none !important; }
+.hero__actions .btn:hover { transform: translateY(-2px); }
+
+/* hover light on tilting cards: a small fixed spot at the pointer, whatever the cursor size */
+@media (prefers-reduced-motion: no-preference) {
+  .fx-tilt-on [data-tilt]::after { background: radial-gradient(circle 70px at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--color-light) 14%, transparent), transparent 100%); }
+}
+
+/* business types: same pill size as the original, current placement and click effect */
+.trades { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
+.trades li { width: auto; }
+.trades [role="tab"] { width: auto; min-height: 40px; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); }
+.trades [role="tab"]::before { display: none; }
+
+/* flowing lines on every section, a different pattern and place in each */
+#services, #industries, #how, #pricing, #faq, #contact { background-repeat: no-repeat; }
+#services  { background-image: url(/images/lines-a.svg); background-position: right -120px top 0;  background-size: min(900px, 90%) auto; }
+#industries{ background-image: url(/images/lines-b.svg); background-position: left -140px center;   background-size: auto min(900px, 100%); }
+#how       { background-image: url(/images/lines-c.svg); background-position: center bottom;        background-size: min(1200px, 100%) auto; }
+#pricing   { background-image: url(/images/lines-b.svg); background-position: right -160px center;  background-size: auto min(860px, 100%); }
+#faq       { background-image: url(/images/lines-c.svg); background-position: center top;           background-size: min(1100px, 100%) auto; }
+#contact   { background-image: url(/images/lines-a.svg); background-position: left -140px bottom;   background-size: min(800px, 90%) auto; }
+@media (max-width: 700px) { #services, #industries, #how, #pricing, #faq, #contact { background-size: 130% auto; } #industries, #pricing { background-size: auto 70%; } }
+:root[data-theme="light"] #services, :root[data-theme="light"] #industries, :root[data-theme="light"] #how, :root[data-theme="light"] #pricing, :root[data-theme="light"] #faq, :root[data-theme="light"] #contact { background-blend-mode: normal; }
+
+/* services cards: live icon orb, orbiting dot, and a light that circles the border on hover */
+@property --ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+.services .rules--cards > li { position: relative; isolation: isolate; }
+.services .svc-icon { position: relative; width: 54px; height: 54px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--color-accent) 38%, transparent), color-mix(in oklab, var(--color-accent) 10%, transparent)); }
+.services .svc-icon::before { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 1px dashed color-mix(in oklab, var(--color-accent) 45%, transparent); }
+.services .svc-icon::after { content: ""; position: absolute; width: 7px; height: 7px; top: -10px; left: calc(50% - 3.5px); border-radius: 50%; background: var(--color-accent-hi); transform-origin: 3.5px 37px; }
+.services .rules--cards > li::before { content: ""; display: block; position: absolute; inset: 0; z-index: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; opacity: 0; transition: opacity .3s;
+  background: conic-gradient(from var(--ang), transparent 0 60%, var(--color-accent) 80%, var(--color-accent-hi) 90%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.services .rules--cards > li:hover::before, .services .rules--cards > li:focus-within::before { opacity: 1; }
+.services .rules--cards > li:hover .svc-icon { background: var(--color-accent); }
+.services .rules--cards > li:hover .svc-icon svg { stroke: var(--color-accent-ink); }
+.services .rules--cards > li > * { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dt-orbit { to { transform: rotate(360deg); } }
+  @keyframes dt-ang { to { --ang: 360deg; } }
+  .services .svc-icon::after { animation: dt-orbit 5s linear infinite; }
+  .services .rules--cards > li:nth-child(even) .svc-icon::after { animation-duration: 7s; animation-direction: reverse; }
+  .services .rules--cards > li:hover::before { animation: dt-ang 2.4s linear infinite; }
+  .services .svc-icon svg { transition: transform .35s var(--ease-out); }
+  .services .rules--cards > li:hover .svc-icon svg { transform: scale(1.18) rotate(-6deg); }
+}

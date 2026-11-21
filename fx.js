@@ -57,8 +57,8 @@
       const x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
       el.style.setProperty("--ry", ((x - 0.5) * 2 * MAX).toFixed(2) + "deg");
       el.style.setProperty("--rx", ((0.5 - y) * 2 * MAX).toFixed(2) + "deg");
-      el.style.setProperty("--mx", (x * 100).toFixed(1) + "%");
-      el.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+      el.style.setProperty("--mx", (ev.clientX - r.left).toFixed(0) + "px"); // glow follows the pointer at a fixed size
+      el.style.setProperty("--my", (ev.clientY - r.top).toFixed(0) + "px");
     }
     function reset(t) { t.classList.remove("is-tilting"); t.style.removeProperty("--rx"); t.style.removeProperty("--ry"); }
     document.addEventListener("pointermove", e => {
