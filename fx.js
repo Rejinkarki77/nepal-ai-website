@@ -83,6 +83,29 @@
     hero.addEventListener("pointerleave", () => { hero.style.setProperty("--px", 0); hero.style.setProperty("--py", 0); });
   }
 
+  /* ---- "why choose us": a line pops out of the card you left and lands on the next one ---- */
+  const tiles = document.querySelector(".why-us .rules--tiles");
+  if (tiles && mouse) {
+    let prev = null;
+    tiles.addEventListener("pointerover", e => {
+      const li = e.target.closest && e.target.closest("li");
+      if (!li || li === prev || e.pointerType !== "mouse") return;
+      if (prev) {
+        const t = tiles.getBoundingClientRect(), a = prev.getBoundingClientRect(), b = li.getBoundingClientRect();
+        const x1 = a.left + a.width / 2 - t.left, y1 = a.top + a.height / 2 - t.top, x2 = b.left + b.width / 2 - t.left, y2 = b.top + b.height / 2 - t.top;
+        const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        const beam = document.createElement("span");
+        beam.className = "fx-beam";
+        beam.style.cssText = "left:" + x1 + "px;top:" + y1 + "px;width:" + len + "px;transform:rotate(" + ang + "deg) scaleX(0)";
+        tiles.append(beam);
+        const grow = beam.animate([{ transform: "rotate(" + ang + "deg) scaleX(0)", opacity: 1 }, { transform: "rotate(" + ang + "deg) scaleX(1)", opacity: 1, offset: 0.6 }, { transform: "rotate(" + ang + "deg) scaleX(1)", opacity: 0 }], { duration: 750, easing: "cubic-bezier(.2,.7,.2,1)" });
+        grow.onfinish = () => beam.remove();
+      }
+      prev = li;
+    });
+    tiles.addEventListener("pointerleave", () => { prev = null; });
+  }
+
   /* ---- click effect: ripple on every button, a small burst on the demo buttons ---- */
   const burst = (x, y) => {
     const n = lite ? 6 : 12, frag = document.createDocumentFragment(), made = [];

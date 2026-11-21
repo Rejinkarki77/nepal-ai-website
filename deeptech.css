@@ -238,3 +238,13 @@
 :root[data-theme="light"] .ulink { color: var(--color-accent-deep); }
 .ulink:hover { text-decoration-color: var(--color-accent); }
 .ulink::after { content: " \2192"; }
+
+/* v3 */
+.trades { margin-bottom: var(--space-xl); }
+.notlisted { margin-top: var(--space-xl); }
+#industries .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.demo { margin-inline: auto 0; max-width: 540px; }
+.why-us .rules--tiles { position: relative; }
+.fx-beam { position: absolute; height: 2px; margin-top: -1px; border-radius: 2px; transform-origin: 0 50%; pointer-events: none; z-index: 3;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-accent) 70%, transparent) 40%, var(--color-accent-hi)); }
+.fx-beam::after { content: ""; position: absolute; right: -4px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-hi); }
