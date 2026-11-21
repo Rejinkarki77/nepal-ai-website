@@ -195,16 +195,16 @@ form.addEventListener("submit", async e => {
 /* ---- live demo ---- */
 
 const DEMOS = {
-  bakery: ["Sunrise Bakery",[["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in","1 kg chocolate cake, bholi 4 baje."],["bot","Noted: 1 kg chocolate cake, pickup tomorrow at 4 PM. We will remind you.",1]]],
-  cafe: ["Himal Cafe",[["in","Aaja rati 7 baje 4 jana ko table huncha?"],["bot","Yes, a table for 4 at 7 PM is free. What name should I put it under?"],["in","Prakash"],["bot","Booked: Prakash, 4 people, 7 PM tonight. We will remind you at 5 PM.",1]]],
-  restaurant: ["Newa Kitchen",[["in","Aaja dinner ko lagi set menu chha?"],["bot","Yes! Today's set: dal bhat, two curries, pickle and papad. Would you like to order or book a table?"],["in","2 set, 8 baje aauchhu"],["bot","Booked 2 sets for 8 PM. The kitchen will have them ready.",1]]],
-  momo: ["Momo Corner",[["in","Veg momo ra chowmein delivery huncha?"],["bot","Yes, we deliver nearby. Veg momo and chowmein added. What is your delivery address?"],["in","Baneshwor, near the temple"],["bot","Thank you! Your order is with the kitchen. We will message you when it leaves.",1]]],
-  salon: ["Glow Salon",[["in","Haircut ko lagi aaja 4 baje slot chha?"],["bot","Yes, 4 PM is free. Shall I book it for you?"],["in","yes"],["bot","Booked for 4 PM today. See you soon!",1]]],
-  clinic: ["City Dental Clinic",[["in","Doctor le aaja appointment dinuhuncha?"],["bot","Yes. Doctor is free at 11 AM and 3 PM today. Which time suits you?"],["in","3 baje"],["bot","Booked for 3 PM. We will send a reminder 2 hours before.",1]]],
-  retail: ["Kathmandu Mart",[["in","Yo kurta ko size M ra L chha?"],["bot","Size M and L are both in stock. Price is Rs. 1,500. Would you like to reserve one?"],["in","L ek ota rakhidinu"],["bot","Reserved: 1 kurta, size L. Please collect it by 7 PM today.",1]]],
-  hotel: ["Lake View Homestay",[["in","Shanibar ko lagi 2 jana ko room khali chha?"],["bot","Yes, a double room is free this Saturday. Breakfast is included. Shall I hold it?"],["in","Hajur, hold garnuhos"],["bot","Room held for Saturday. Please confirm within 24 hours and we will send directions.",1]]],
-  tuition: ["Bright Tuition Centre",[["in","Class 10 ko maths batch kahile suru huncha?"],["bot","The new Class 10 maths batch starts on Sunday at 7 AM. Would you like to reserve a seat?"],["in","Ho, mero chhora ko lagi"],["bot","Seat reserved. We will message you the fee details and first-day schedule.",1]]],
-  gym: ["Core Fitness",[["in","Monthly membership kati parchha?"],["bot","Monthly membership details are on our price list. Would you like a free trial day first?"],["in","Ho, bholi"],["bot","Trial booked for tomorrow at 6 AM. Please bring a towel and water.",1]]]
+  bakery: ["Sunrise Bakery",40,[["in","Aaja pasal kati baje samma khulchha?"],["bot","Namaste! We are open until 8 PM today. Would you like to order something?"],["in","Birthday cake chha? 1 kg, chocolate"],["bot","Yes, 1 kg chocolate cake is Rs. 1,800. Want a message written on it?"],["in","Happy Birthday Sita, bholi 4 baje pickup"],["bot","Order noted: 1 kg chocolate cake, message \"Happy Birthday Sita\", pickup tomorrow 4 PM. We will remind you.",1]]],
+  cafe: ["Himal Cafe",60,[["in","Aaja rati 7 baje 4 jana ko table huncha?"],["bot","Yes, a table for 4 at 7 PM is free. Would you like a window seat or garden seat?"],["in","Garden, Prakash ko naam ma"],["bot","Booked: Prakash, 4 people, garden table, 7 PM tonight. We will remind you at 5 PM.",1]]],
+  restaurant: ["Newa Kitchen",25,[["in","Aaja dinner ko lagi set menu chha?"],["bot","Yes! Today's set: dal bhat, two curries, pickle and papad. Veg or non-veg?"],["in","Non-veg, 2 set"],["bot","2 non-veg sets. Dine in or delivery?"],["in","Dine in, 8 baje aauchhu"],["bot","Booked 2 sets for 8 PM. The kitchen will have them ready when you arrive.",1]]],
+  momo: ["Momo Corner",15,[["in","Veg momo ra chowmein delivery huncha?"],["bot","Yes, we deliver nearby. How many plates of veg momo and chowmein?"],["in","2 momo, 1 chowmein"],["bot","2 veg momo and 1 chowmein added. What is your delivery address?"],["in","Baneshwor, near the temple"],["bot","Thank you! Your order is with the kitchen. We will message you when the rider leaves.",1]]],
+  salon: ["Glow Salon",330,[["in","Haircut ra facial ko lagi aaja slot chha?"],["bot","Yes! Haircut at 4 PM and facial at 5 PM are both free today. Shall I book both?"],["in","Ho, dubai"],["bot","Booked: haircut 4 PM, facial 5 PM today. We will remind you one hour before.",1]]],
+  clinic: ["City Dental Clinic",200,[["in","Dat dukhyo, doctor le aaja dekhaunuhuncha?"],["bot","Sorry to hear that. Doctor is free at 11 AM and 3 PM today. Which time suits you?"],["in","3 baje"],["bot","Booked for 3 PM. Please tell me your name and age for the file."],["in","Ramesh, 34"],["bot","Thank you, Ramesh. Booked for 3 PM. We will send a reminder 2 hours before.",1]]],
+  retail: ["Kathmandu Mart",280,[["in","Yo kurta ko size M ra L chha?"],["bot","Size M and L are both in stock. Price is Rs. 1,500. Would you like to reserve one?"],["in","L ek ota rakhidinu"],["bot","Reserved: 1 kurta, size L. Please collect it by 7 PM today. Pay in the shop.",1]]],
+  hotel: ["Lake View Homestay",170,[["in","Shanibar ko lagi 2 jana ko room khali chha?"],["bot","Yes, a double room is free this Saturday. Breakfast is included. Shall I hold it?"],["in","Hajur, hold garnuhos"],["bot","Room held for Saturday. Would you like airport pickup too?"],["in","Pickup chaina, bus bata aauchhu"],["bot","Noted, no pickup. Please confirm within 24 hours and we will send directions from the bus park.",1]]],
+  tuition: ["Bright Tuition Centre",240,[["in","Class 10 ko maths batch kahile suru huncha?"],["bot","The new Class 10 maths batch starts on Sunday at 7 AM. Would you like to reserve a seat?"],["in","Ho, mero chhora ko lagi"],["bot","Seat reserved. We will message you the fee details and first-day schedule.",1]]],
+  gym: ["Core Fitness",120,[["in","Monthly membership kati parchha?"],["bot","Monthly, 3-month and yearly plans are available. Would you like a free trial day first?"],["in","Ho, bholi bihana"],["bot","Trial booked for tomorrow at 6 AM. Please bring a towel and water.",1]]]
 };
 
 const demoLog = document.getElementById("demo-log");
@@ -217,9 +217,9 @@ function showDemo(key){
 
   demoLog.setAttribute("aria-labelledby", "tab-"+key);
 
-  const [wname, msgs] = DEMOS[key];
+  const [wname, hue, msgs] = DEMOS[key];
 
-  if ($("waName")) { $("waName").textContent = wname; $("waAv").textContent = wname[0]; }
+  if ($("waName")) { $("waName").textContent = wname; $("waAv").textContent = wname[0]; $("waAv").style.background = "oklch(72% 0.15 " + hue + ")"; }
 
   demoLog.replaceChildren(...msgs.map(([who,text,done])=>{
 
@@ -437,7 +437,11 @@ if (i >= msgs.length) return;
 
   }
 
-  function onTab() {
+  function onTab(e) {
+
+    if (e && e.type === "click" && demoBox && innerWidth < 900) { const r = demoBox.getBoundingClientRect(); if (r.top > innerHeight * 0.55 || r.bottom < 80) demoBox.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "center" }); }
+
+
 
     const now = picked();
 
