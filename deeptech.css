@@ -159,3 +159,6 @@
 .hero__actions { gap: var(--space-md); align-items: center; }
 .wa-badge::before, .chat--hero .chat__head span::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; border-radius: 50%; background: var(--color-accent-2); }
 .chat--hero .chat__head span { color: var(--color-accent-2); font-weight: 600; }
+.hl { white-space: nowrap; }
+.hero__actions .btn--ghost { min-height: 52px; padding-inline: var(--space-lg); border-radius: var(--radius-btn, 999px); }
+.btn.btn--ghost { border: 1.5px solid var(--color-accent) !important; box-shadow: none !important; }
