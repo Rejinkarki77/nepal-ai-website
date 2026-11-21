@@ -20,7 +20,11 @@ const CONFIG = {
 
   leadsUrl: "https://svjglbxmeodcfiodupvf.supabase.co",
 
-  leadsKey: "sb_publishable_HdtavQYEN0VP1gEAYQU7vg_xRw2Gvbv"
+  leadsKey: "sb_publishable_HdtavQYEN0VP1gEAYQU7vg_xRw2Gvbv",
+
+  // Social pages: paste each full https:// link here (a link left empty stays hidden)
+
+  social: { instagram: "", tiktok: "", facebook: "" }
 
 };
 
@@ -793,3 +797,6 @@ document.querySelectorAll(".mark--logo, .footer__logo img").forEach(img => {
   link.addEventListener("click", () => { img.classList.remove("logo-spin"); void img.offsetWidth; img.classList.add("logo-spin"); });
   img.addEventListener("animationend", () => img.classList.remove("logo-spin"));
 });
+
+/* footer social icons: shown only when a link is set in CONFIG.social */
+document.querySelectorAll("[data-social]").forEach(a => { const u = CONFIG.social[a.dataset.social]; if (/^https:\/\//.test(u || "")) { a.href = u; a.hidden = false; } });
