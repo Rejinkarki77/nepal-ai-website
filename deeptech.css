@@ -14,7 +14,7 @@
 /* ---------- header: menu in the middle, demo button on the right ---------- */
 .nav__links { margin-inline: auto; }
 .nav__cta { margin-left: 0; min-height: 44px; padding-inline: var(--space-lg); }
-@media (max-width: 960px) { .nav__row > .nav__cta { display: none; } }
+@media (max-width: 1100px) { .nav__row > .nav__cta { display: none; } }
 
 /* ---------- hero ---------- */
 .eyebrow { margin: 0 0 var(--space-md); color: var(--dt-accent-text); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
