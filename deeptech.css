@@ -150,3 +150,12 @@
 .svc-icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; }
 .svc-icon svg { stroke: var(--color-accent); }
 .trades li { padding: 0; border: 0; background: none; box-shadow: none; }
+
+/* match the Design 1 mockup: outlined secondary buttons, headline in three lines */
+.btn--ghost, .btn--ghost:hover { background: transparent !important; color: var(--color-accent-hi) !important; box-shadow: inset 0 0 0 1.5px var(--color-accent) !important; }
+:root[data-theme="light"] .btn--ghost { color: var(--color-accent-deep) !important; }
+.btn--ghost:hover { background: color-mix(in oklab, var(--color-accent) 14%, transparent) !important; }
+.hero__copy h1 { max-width: 15ch; font-size: clamp(2.4rem, 4.6vw, 4.1rem); line-height: 1.08; }
+.hero__actions { gap: var(--space-md); align-items: center; }
+.wa-badge::before, .chat--hero .chat__head span::before { content: ""; display: inline-block; width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; border-radius: 50%; background: var(--color-accent-2); }
+.chat--hero .chat__head span { color: var(--color-accent-2); font-weight: 600; }
