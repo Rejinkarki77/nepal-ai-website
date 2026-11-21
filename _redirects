@@ -1,5 +1,2 @@
 /index.html / 301
 /privacy.html /privacy/ 301
-
-# Send the www address to the main address so Google sees one site (301 = permanent).
-https://www.nexaflownp.com/* https://nexaflownp.com/:splat 301
