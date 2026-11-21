@@ -197,17 +197,6 @@
 .trades [role="tab"] { width: auto; min-height: 40px; padding: var(--space-xs) var(--space-md); border-radius: var(--radius-pill); }
 .trades [role="tab"]::before { display: none; }
 
-/* flowing lines on every section, a different pattern and place in each */
-#services, #industries, #how, #pricing, #faq, #contact { background-repeat: no-repeat; }
-#services  { background-image: url(/images/lines-a.svg); background-position: right -120px top 0;  background-size: min(900px, 90%) auto; }
-#industries{ background-image: url(/images/lines-b.svg); background-position: left -140px center;   background-size: auto min(900px, 100%); }
-#how       { background-image: url(/images/lines-c.svg); background-position: center bottom;        background-size: min(1200px, 100%) auto; }
-#pricing   { background-image: url(/images/lines-b.svg); background-position: right -160px center;  background-size: auto min(860px, 100%); }
-#faq       { background-image: url(/images/lines-c.svg); background-position: center top;           background-size: min(1100px, 100%) auto; }
-#contact   { background-image: url(/images/lines-a.svg); background-position: left -140px bottom;   background-size: min(800px, 90%) auto; }
-@media (max-width: 700px) { #services, #industries, #how, #pricing, #faq, #contact { background-size: 130% auto; } #industries, #pricing { background-size: auto 70%; } }
-:root[data-theme="light"] #services, :root[data-theme="light"] #industries, :root[data-theme="light"] #how, :root[data-theme="light"] #pricing, :root[data-theme="light"] #faq, :root[data-theme="light"] #contact { background-blend-mode: normal; }
-
 /* services cards: live icon orb, orbiting dot, and a light that circles the border on hover */
 @property --ang { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
 .services .rules--cards > li { position: relative; isolation: isolate; }
@@ -248,3 +237,35 @@
 .fx-beam { position: absolute; height: 2px; margin-top: -1px; border-radius: 2px; transform-origin: 0 50%; pointer-events: none; z-index: 3;
   background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--color-accent) 70%, transparent) 40%, var(--color-accent-hi)); }
 .fx-beam::after { content: ""; position: absolute; right: -4px; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--color-accent-hi); }
+
+
+/* ================= v4 ================= */
+/* same flowing side lines on every section, left and right, so the margins are never empty */
+main > section:not(.hero), footer { background-image: url(/images/lines-l.svg), url(/images/lines-r.svg); background-repeat: no-repeat, no-repeat; background-size: auto min(960px, 100%), auto min(960px, 100%); background-position: left -90px top 0, right -90px bottom 0; }
+main > section:nth-of-type(even):not(.hero) { background-position: left -90px bottom 0, right -90px top 0; }
+@media (max-width: 900px) { main > section:not(.hero), footer { background-size: auto 55%, auto 55%; background-position: left -190px top 0, right -190px bottom 0; } }
+
+/* contact: form sits further right, margins narrower */
+#contact .container { padding-inline: var(--space-xl); }
+@media (max-width: 700px) { #contact .container { padding-inline: var(--space-md); } }
+
+/* typography: Space Grotesk headings, steady spacing rhythm */
+:root { --font-display: "Space Grotesk", "Wix Madefor Display", ui-sans-serif, system-ui, sans-serif; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+h1 { font-weight: 700; letter-spacing: -0.03em; line-height: 1.04; }
+h2 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 var(--space-md); font-size: clamp(2rem, 1.2rem + 2.4vw, 3.25rem); }
+h3 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.25; }
+p, li, dd { text-wrap: pretty; }
+.lead { font-size: clamp(1.0625rem, 0.95rem + 0.35vw, 1.25rem); line-height: 1.6; color: var(--color-muted); margin: 0; max-width: 56ch; }
+.services__head .lead, .split__head .lead { margin-top: 0; }
+.section { padding-block: clamp(56px, 7vw, 96px); }
+.why-us { padding-top: clamp(40px, 5vw, 64px); }
+.services { gap: var(--space-xl); }
+.services__head h2 { margin-bottom: var(--space-sm); }
+.split__head h2 { margin-bottom: var(--space-md); }
+.split { gap: var(--space-xl) var(--space-2xl); }
+#pricing h2 + .lead, #faq h2 { margin-bottom: var(--space-lg); }
+.lead--spaced { margin: 0 0 var(--space-xl); }
+.plans { margin-top: var(--space-xl); }
+#contact .split__head dl { margin-top: var(--space-xl); }
+#how, #pricing, #faq, #contact { content-visibility: visible; }
