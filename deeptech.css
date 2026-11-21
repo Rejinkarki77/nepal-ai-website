@@ -328,3 +328,7 @@ p, li, dd { text-wrap: pretty; }
 /* wave: stroke only the curve, never the straight edges */
 .ft__w path:first-child { stroke: none; }
 .ft__w .ft__line { fill: none; }
+
+/* footer wave: lines only, no filled shapes */
+.ft__w path:first-child { display: none; }
+.ft__w--back { transform: translateX(-25%); }
