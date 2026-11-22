@@ -346,3 +346,12 @@ p, li, dd { text-wrap: pretty; }
   .hero__net { opacity: 1; -webkit-mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 55%, transparent) 0%, var(--color-paper) 40%); mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 55%, transparent) 0%, var(--color-paper) 40%); }
   .hero__net .sig, .hero__net .e-glow { stroke-width: 2.8; }
 }
+
+
+/* ================= logo: circuit N + NEXAFLOW ================= */
+.wordmark .logo-full { display: block; height: 40px; width: auto; }
+.wordmark .logo-mark { display: none; height: 40px; width: auto; }
+.wordmark:hover .logo-full, .wordmark:hover .logo-mark { filter: brightness(1.12); }
+@media (max-width: 560px) { .wordmark .logo-full { display: none; } .wordmark .logo-mark { display: block; } .ft__logo .logo-full { display: block; } }
+.ft__logo img { width: auto; height: 40px; border-radius: 0; box-shadow: none; aspect-ratio: auto; }
+.loader-img { width: auto; height: 96px; border-radius: 0; }

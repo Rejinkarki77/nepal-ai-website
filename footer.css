@@ -52,3 +52,12 @@
 .ft__w--back, .ft__w--front { animation: none; }
 @media (prefers-reduced-motion: no-preference) { .ft__w { animation: ft-ltr 14s linear infinite; } }
 @media (max-width: 899px) { .ft { margin-top: 32px; } .ft__wave { height: 24px; } }
+
+
+/* ================= logo: circuit N + NEXAFLOW ================= */
+.wordmark .logo-full { display: block; height: 40px; width: auto; }
+.wordmark .logo-mark { display: none; height: 40px; width: auto; }
+.wordmark:hover .logo-full, .wordmark:hover .logo-mark { filter: brightness(1.12); }
+@media (max-width: 560px) { .wordmark .logo-full { display: none; } .wordmark .logo-mark { display: block; } .ft__logo .logo-full { display: block; } }
+.ft__logo img { width: auto; height: 40px; border-radius: 0; box-shadow: none; aspect-ratio: auto; }
+.loader-img { width: auto; height: 96px; border-radius: 0; }
