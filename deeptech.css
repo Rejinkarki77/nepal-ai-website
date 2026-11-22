@@ -332,3 +332,17 @@ p, li, dd { text-wrap: pretty; }
 /* footer wave: lines only, no filled shapes */
 .ft__w path:first-child { display: none; }
 .ft__w--back { transform: translateX(-25%); }
+
+
+/* ================= v9: cards without icons, same effects on phones ================= */
+.services .rules--cards > li { padding-top: var(--space-xl); }
+.services .rules--cards > li h3 { margin-top: 0; }
+.services .rules--cards > li::before { opacity: 0; }
+.services .rules--cards > li.is-lit::before { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) { .services .rules--cards > li.is-lit::before { animation: dt-ang 2.4s linear infinite; } }
+.services .rules--cards > li.is-lit { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 30%, transparent); }
+@media (hover: none) { .fx-tilt-on [data-tilt]:hover { translate: none; } .fx-tilt-on [data-tilt]:hover:not(.is-tilting) { box-shadow: none; } }
+@media (max-width: 60rem) {
+  .hero__net { opacity: 1; -webkit-mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 55%, transparent) 0%, var(--color-paper) 40%); mask-image: linear-gradient(90deg, color-mix(in oklab, var(--color-paper) 55%, transparent) 0%, var(--color-paper) 40%); }
+  .hero__net .sig, .hero__net .e-glow { stroke-width: 2.8; }
+}

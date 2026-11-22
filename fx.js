@@ -47,7 +47,7 @@
   }
 
   /* ---- 3D tilt (mouse only, skipped on low-power devices) ---- */
-  if (mouse && !lite) {
+  if (!lite) {
     root.classList.add("fx-tilt-on");
     let el = null, ev = null, raf = 0;
     const MAX = 7;
@@ -69,6 +69,16 @@
       ev = e; if (!raf) raf = requestAnimationFrame(paint);
     }, { passive: true });
     document.addEventListener("pointerleave", () => { if (el) { reset(el); el = null; } }, true);
+    /* touch: a tap tilts the card toward your finger and lets go a moment later */
+    let hold = 0;
+    document.addEventListener("pointerdown", e => {
+      if (e.pointerType === "mouse") return;
+      const t = e.target.closest && e.target.closest("[data-tilt]");
+      if (!t) return;
+      clearTimeout(hold); if (el && el !== t) reset(el);
+      el = t; ev = e; t.classList.add("is-tilting"); paint();
+      hold = setTimeout(() => { reset(t); if (el === t) el = null; }, 450);
+    }, { passive: true });
   }
 
   /* ---- hero parallax (mouse only) ---- */
@@ -83,13 +93,21 @@
     hero.addEventListener("pointerleave", () => { hero.style.setProperty("--px", 0); hero.style.setProperty("--py", 0); });
   }
 
+  if (hero && !mouse && !lite) {
+    hero.classList.add("fx-parallax");
+    let raf = 0;
+    addEventListener("scroll", () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => { raf = 0; const h = hero.offsetHeight || 1; hero.style.setProperty("--py", (Math.min(Math.max(scrollY / h, 0), 1) * 1.4 - 0.2).toFixed(3)); });
+    }, { passive: true });
+  }
+
   /* ---- "why choose us": a line pops out of the card you left and lands on the next one ---- */
   const tiles = document.querySelector(".why-us .rules--tiles");
-  if (tiles && mouse) {
+  if (tiles) {
     let prev = null;
-    tiles.addEventListener("pointerover", e => {
-      const li = e.target.closest && e.target.closest("li");
-      if (!li || li === prev || e.pointerType !== "mouse") return;
+    const beamTo = li => {
+      if (!li || li === prev) return;
       if (prev) {
         const t = tiles.getBoundingClientRect(), a = prev.getBoundingClientRect(), b = li.getBoundingClientRect();
         const x1 = a.left + a.width / 2 - t.left, y1 = a.top + a.height / 2 - t.top, x2 = b.left + b.width / 2 - t.left, y2 = b.top + b.height / 2 - t.top;
@@ -102,8 +120,24 @@
         grow.onfinish = () => beam.remove();
       }
       prev = li;
-    });
-    tiles.addEventListener("pointerleave", () => { prev = null; });
+    };
+    if (mouse) {
+      tiles.addEventListener("pointerover", e => { if (e.pointerType === "mouse") beamTo(e.target.closest && e.target.closest("li")); });
+      tiles.addEventListener("pointerleave", () => { prev = null; });
+    } else {
+      /* phones: the line runs on to each card as it reaches the middle of the screen, and on every tap */
+      tiles.addEventListener("pointerdown", e => beamTo(e.target.closest && e.target.closest("li")), { passive: true });
+      if ("IntersectionObserver" in window) {
+        const mid = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) beamTo(e.target); }), { rootMargin: "-40% 0px -40% 0px" });
+        [...tiles.children].forEach(li => mid.observe(li));
+      }
+    }
+  }
+
+  /* ---- service cards on phones: the border light circles each card as it reaches the middle of the screen ---- */
+  if (!mouse && "IntersectionObserver" in window) {
+    const lit = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("is-lit", e.isIntersecting)), { rootMargin: "-38% 0px -38% 0px" });
+    document.querySelectorAll(".services .rules--cards > li").forEach(li => lit.observe(li));
   }
 
   /* ---- click effect: ripple on every button, a small burst on the demo buttons ---- */
