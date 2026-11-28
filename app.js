@@ -791,12 +791,7 @@ if (i >= msgs.length) return;
   setTimeout(hide, 1200);
 })();
 
-/* Click a logo and it spins once */
-document.querySelectorAll(".mark--logo, .footer__logo img").forEach(img => {
-  const link = img.closest("a");
-  link.addEventListener("click", () => { img.classList.remove("logo-spin"); void img.offsetWidth; img.classList.add("logo-spin"); });
-  img.addEventListener("animationend", () => img.classList.remove("logo-spin"));
-});
+
 
 /* footer social icons: shown only when a link is set in CONFIG.social */
 document.querySelectorAll("[data-social]").forEach(a => { const u = CONFIG.social[a.dataset.social]; if (/^https:\/\//.test(u || "")) { a.href = u; a.hidden = false; } });

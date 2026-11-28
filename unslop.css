@@ -1,0 +1,51 @@
+/* Quiet layer, loaded last on every page.
+   The product (the WhatsApp chats) carries colour and motion; the chrome around it stays still and flat.
+   Method adapted from unslop by Damir Sokolovsky (@heydamir), CC BY 4.0, https://github.com/heydamir/unslop */
+
+:root { --ease-out: cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ---------- 1. backgrounds: no networks, blobs, edge lines or hue gradients ---------- */
+.hero__bg, .aura, .hero__mandala, .hero__net, .mandala-bg { display: none !important; }
+.hero__scrim { background: none !important; }
+main > section, footer, .ft { background-image: none !important; }
+.services .rules--cards > li, .plan, .notlisted, .services .rules--cards > li:hover, .services .rules--cards > li:focus-within {
+  background: var(--color-paper-2) !important;
+}
+.steps > li { background-image: none !important; }
+.shine { background: none !important; -webkit-text-fill-color: currentColor !important; color: inherit !important; }
+
+/* decorative bars and underlines */
+.nav::after, .plans > .plan::before, .rules--tiles > li::before, #lead::before, .demo::before, .footer::before,
+h2::after, .services .rules--cards > li::before, .fx-beam, .fx-spark, .fx-ripple { display: none !important; content: none !important; }
+
+/* ---------- 2. colour: no glows or coloured shadows; hairline borders ---------- */
+.btn, .btn:hover, .hero__actions .btn, #lead .btn, .plan--feat .btn, .trades [role="tab"][aria-selected="true"] { box-shadow: none !important; }
+.services .rules--cards > li, .plan { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-light) 8%, transparent) !important; }
+.plan--feat { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-accent) 45%, transparent) !important; }
+.chat--hero, .demo { border-color: color-mix(in oklab, var(--color-light) 10%, transparent) !important; }
+.glass { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: var(--color-paper-2) !important; }
+
+/* ---------- 5. type: calmer weights, sentence case, left-aligned heads ---------- */
+h1 { font-weight: 600 !important; letter-spacing: -0.02em !important; }
+h2 { font-weight: 500 !important; letter-spacing: -0.01em !important; text-align: left !important; }
+h3 { font-weight: 500 !important; letter-spacing: 0 !important; }
+.services__head { margin-inline: 0 !important; text-align: left !important; }
+.ft__col h3 { text-transform: none !important; letter-spacing: 0 !important; font-size: var(--text-sm) !important; font-weight: 500 !important; }
+#faq .container > h2, #faq h2 { margin-inline: 0 !important; }
+
+/* ---------- 9. motion: no loops, no hover lifts, no 3D; one entrance (the hero chat) ---------- */
+.loader-img, .logo-spin, .ft__w, .services .svc-icon::after { animation: none !important; }
+.ft__wave { display: none !important; }
+.ft { margin-top: 0 !important; border-top: 1px solid var(--color-rule); }
+[data-tilt], .fx-tilt-on [data-tilt] { transform: none !important; translate: none !important; }
+[data-tilt]::after { display: none !important; }
+.hero.fx-parallax .hero__net, .hero.fx-parallax .hero__mandala { transform: none !important; translate: none !important; }
+.fx-r { opacity: 1 !important; translate: none !important; }
+.fx .demo:not(.is-open) { opacity: 1 !important; }
+.fx .demo.is-open, .fx .demo.is-switching, .btn.is-sent { animation: none !important; }
+.btn:hover, .btn:active, .hero__actions .btn:hover, .trades [role="tab"]:hover, .trades [role="tab"]:active, .ft__soc:hover, .ft__col a:hover,
+.footer__links a:hover, .rules--tiles > li:hover, .plan:hover, .bubble:hover { transform: none !important; translate: none !important; scale: none !important; }
+.trades [role="tab"], .btn, .ft__col a, .ft__soc { transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), border-color 160ms var(--ease-out) !important; }
+
+/* ---------- signature: the time on the hero chat, to show it answers after closing ---------- */
+.bubble__time { display: block; margin-top: 4px; font-size: 11px; line-height: 1; text-align: right; opacity: 0.7; font-variant-numeric: tabular-nums; }
